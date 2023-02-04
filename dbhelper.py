@@ -1,3 +1,5 @@
+#!/root/.local/lib/python3.6
+
 import pymongo
 from bson import ObjectId
 
