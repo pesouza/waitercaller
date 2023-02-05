@@ -1,7 +1,7 @@
 import qrcode
 from PIL import Image, ImageDraw, ImageFont
 from qrcode.image.styledpil import StyledPilImage
-from qrcode.image.styles.moduledrawers.pil import RoundedModuleDrawer
+#from qrcode.image.styles.moduledrawers.pil import RoundedModuleDrawer
 from qrcode.image.styles.colormasks import RadialGradiantColorMask
 
 class QrcodeHelper:
@@ -17,7 +17,7 @@ class QrcodeHelper:
         img = qr.make_image(fill='black', back_color='white')
 
         img = qr.make_image(image_factory=StyledPilImage, 
-                            module_drawer=RoundedModuleDrawer(),
+                            #module_drawer=RoundedModuleDrawer(),
                             color_mask=RadialGradiantColorMask(),)
                             #embeded_image_path=txt_img)
 
