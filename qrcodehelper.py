@@ -1,3 +1,4 @@
+#!/usr/local/environments/flask/lib/python3.6
 import qrcode
 from PIL import Image, ImageDraw, ImageFont
 from qrcode.image.styledpil import StyledPilImage

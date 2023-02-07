@@ -1,4 +1,4 @@
-#!/root/.local/lib/python3.6
+#!/usr/local/environments/flask/lib/python3.6
 
 import pymongo
 from bson import ObjectId
@@ -16,14 +16,14 @@ class DBHelper:
         return self.db.users.find_one({"email": email})
 
     def add_user(self, email, salt, hashed):
-        self.db.users.insert({"email": email, "salt": salt, "hashed": hashed})
+        self.db.users.insert_one({"email": email, "salt": salt, "hashed": hashed})
 
     def add_table(self, number, owner):
-        new_id = self.db.tables.insert({"number": number, "owner": owner})
+        new_id = self.db.tables.insert_one({"number": number, "owner": owner})
         return new_id
 
     def update_table(self, _id, url):
-        self.db.tables.update({"_id": _id}, {"$set": {"url": url}})
+        self.db.tables.update_one({"_id": _id}, {"$set": {"url": url}})
 
     def get_tables(self, owner_id):
         return list(self.db.tables.find({"owner": owner_id}))
@@ -32,12 +32,12 @@ class DBHelper:
         return self.db.tables.find_one({"_id": ObjectId(table_id)})
 
     def delete_table(self, table_id):
-        self.db.tables.remove({"_id": ObjectId(table_id)})
+        self.db.tables.remove_one({"_id": ObjectId(table_id)})
 
     def add_request(self, table_id, time):
         table = self.get_table(table_id)
         try:
-            self.db.requests.insert({"owner": table['owner'], "table_number": table[
+            self.db.requests.insert_one({"owner": table['owner'], "table_number": table[
                                     'number'], "table_id": table_id, "time": time})
             return True
         except pymongo.errors.DuplicateKeyError:
@@ -47,4 +47,4 @@ class DBHelper:
         return list(self.db.requests.find({"owner": owner_id}))
 
     def delete_request(self, request_id):
-        self.db.requests.remove({"_id": ObjectId(request_id)})
+        self.db.requests.remove_one({"_id": ObjectId(request_id)})
