@@ -1,4 +1,5 @@
 #!/usr/local/environments/flask/lib/python3.6
+import os
 import qrcode
 from PIL import Image, ImageDraw, ImageFont
 from qrcode.image.styledpil import StyledPilImage
@@ -34,8 +35,8 @@ class QrcodeHelper:
         new_image.paste(img,(0,image2_size[1]))
         new_image.paste(imgt,(0,image1_size[1] + image2_size[1]))
 
-
-        new_image.save(f'images/{text}.png')
+        os.makedirs('static/images', exist_ok=True)
+        new_image.save(f'static/images/{text}.png')
         return f'images/{text}.png'
     
     def create_image(self, tipo, message, size, size_t, bgColor='yellow', fontColor='black'):
