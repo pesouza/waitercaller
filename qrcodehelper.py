@@ -4,6 +4,9 @@ from PIL import Image, ImageDraw, ImageFont
 from qrcode.image.styledpil import StyledPilImage
 #from qrcode.image.styles.moduledrawers.pil import RoundedModuleDrawer
 from qrcode.image.styles.colormasks import RadialGradiantColorMask
+from os.path import join, dirname, realpath
+
+IMAGES_PATH = join(dirname(realpath(__file__)), 'static', 'images')
 
 class QrcodeHelper:
     def gen_code(self, text, input_data):
@@ -38,7 +41,7 @@ class QrcodeHelper:
         new_image.paste(imgl,(0, image1_size[1] + 2*image2_size[1]))
         new_image.paste(imgt,(0,image1_size[1] + 3*image2_size[1]))
 
-        new_image.save(f'./static/images/{text}.png')
+        new_image.save(f'{IMAGES_PATH}/{text}.png')
         return f'images/{text}.png'
     
     def create_image(self, message, size, size_t, font= 'arial',
