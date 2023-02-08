@@ -32,7 +32,7 @@ class DBHelper:
         return self.db.tables.find_one({"_id": ObjectId(table_id)})
 
     def delete_table(self, table_id):
-        self.db.tables.remove({"_id": ObjectId(table_id)})
+        self.db.tables.delete_one({"_id": ObjectId(table_id)})
 
     def add_request(self, table_id, time):
         table = self.get_table(table_id)
@@ -47,4 +47,4 @@ class DBHelper:
         return list(self.db.requests.find({"owner": owner_id}))
 
     def delete_request(self, request_id):
-        self.db.requests.remove({"_id": ObjectId(request_id)})
+        self.db.requests.delete_one({"_id": ObjectId(request_id)})
