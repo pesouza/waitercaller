@@ -30,6 +30,9 @@
                 </tr>
               {% endfor %}
             </table>
+            <!--audio autoplay>
+              <source src="{{ url_for('static', filename = 'sounds/alert.wav') }}" type="audio/mpeg" >
+            </audio-->
           {% else %}
             <p>All your customers are currently satisfied - no requests</p>
           {% endif %}

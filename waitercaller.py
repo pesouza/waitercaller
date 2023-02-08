@@ -134,9 +134,17 @@ def account_deletetable():
 @app.route("/newrequest/<tid>")
 def new_request(tid):
     if DB.add_request(tid, datetime.datetime.now()):
-        return "Your request has been logged and a waiter will be with you shortly"
-    return "There is already a request pending for this table. Please be patient, a waiter will be there ASAP"
+        message = "Your request has been logged and a waiter will be with you shortly"
+        background_color = "green"
+        sound = 'sounds/ok.wav'
+    else:
+        message = "There is already a request pending for this table. Please be patient, a waiter will be there ASAP"
+        background_color = "red"
+        sound = 'sounds/again.wav'
 
+    return render_template("request.html", message=message, 
+                            background_color=background_color,
+                            sound=sound)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Request</title>
+    <style>
+      body {
+        background-color: {{ background_color }};
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      h1 {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>{{ message }}</h1>
+    <audio autoplay>
+        <source src="{{ url_for('static', filename = sound) }}" type="audio/mpeg" >
+    </audio>
+</body>
+</html>
