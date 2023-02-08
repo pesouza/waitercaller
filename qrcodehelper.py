@@ -27,9 +27,9 @@ class QrcodeHelper:
 
         image1_size = img.size
         imgc = self.create_image('Chame o', (image1_size[0], 100), 72)
-        imgw = self.create_image('Garçom!', (image1_size[0], 100), 72, 'ariblk.ttf')
+        imgw = self.create_image('Garçom!', (image1_size[0], 100), 72, 'ariblk')
         imgl = self.create_image(link, (image1_size[0], 100), 32)
-        imgt = self.create_image(text, (image1_size[0], 100), 72, 'ariblk.ttf')
+        imgt = self.create_image(text, (image1_size[0], 100), 72, 'ariblk')
         image2_size = imgt.size
         new_image = Image.new('RGB',(image1_size[0], image1_size[1] + 4*image2_size[1]), (250,250,250))
         new_image.paste(imgc,(0, 0))
@@ -38,13 +38,13 @@ class QrcodeHelper:
         new_image.paste(imgl,(0, image1_size[1] + 2*image2_size[1]))
         new_image.paste(imgt,(0,image1_size[1] + 3*image2_size[1]))
 
-        new_image.save(f'images/{text}.png')
+        new_image.save(f'./static/images/{text}.png')
         return f'images/{text}.png'
     
-    def create_image(self, message, size, size_t, font= 'arial.ttf',
+    def create_image(self, message, size, size_t, font= 'arial',
                      bgColor='yellow', fontColor='black'):
         W, H = size
-        font = ImageFont.truetype(font, size_t)
+        font = ImageFont.truetype(font + '.ttf', size_t)
         image = Image.new('RGB', size, bgColor)
         draw = ImageDraw.Draw(image)
         _, _, w, h = draw.textbbox((0, 0), message, font=font)
