@@ -1,5 +1,5 @@
 #!/usr/local/environments/flask/lib/python3.6
-
+import os
 import pymongo
 from bson import ObjectId
 
@@ -22,8 +22,8 @@ class DBHelper:
         new_id = self.db.tables.insert_one({"number": number, "owner": owner})
         return new_id
 
-    def update_table(self, _id, url):
-        self.db.tables.update_one({"_id": _id}, {"$set": {"url": url}})
+    def update_table(self, _id, url, qrc):
+        self.db.tables.update_one({"_id": _id}, {"$set": {"url": url, "qrc": qrc}})
 
     def get_tables(self, owner_id):
         return list(self.db.tables.find({"owner": owner_id}))
@@ -32,7 +32,7 @@ class DBHelper:
         return self.db.tables.find_one({"_id": ObjectId(table_id)})
 
     def delete_table(self, table_id):
-        self.db.tables.remove_one({"_id": ObjectId(table_id)})
+        self.db.tables.remove({"_id": ObjectId(table_id)})
 
     def add_request(self, table_id, time):
         table = self.get_table(table_id)
@@ -47,4 +47,4 @@ class DBHelper:
         return list(self.db.requests.find({"owner": owner_id}))
 
     def delete_request(self, request_id):
-        self.db.requests.remove_one({"_id": ObjectId(request_id)})
+        self.db.requests.remove({"_id": ObjectId(request_id)})

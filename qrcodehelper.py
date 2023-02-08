@@ -7,6 +7,7 @@ from qrcode.image.styles.colormasks import RadialGradiantColorMask
 
 class QrcodeHelper:
     def gen_code(self, text, input_data):
+        link = f'{input_data}'
         #print(text, input_data)
         #txt_img = 'images/txt.png'
         #Creating an instance of qrcode
@@ -24,7 +25,7 @@ class QrcodeHelper:
                             #embeded_image_path=txt_img)
 
         image1_size = img.size
-        imgl = self.create_image('Link: ',input_data, (image1_size[0], 100), 32)
+        imgl = self.create_image('Link: ',link, (image1_size[0], 100), 32)
         imgt = self.create_image('Mesa: ',text, (image1_size[0], 100), 72)
         image2_size = imgt.size
         new_image = Image.new('RGB',(image1_size[0], image1_size[1] + 2*image2_size[1]), (250,250,250))
