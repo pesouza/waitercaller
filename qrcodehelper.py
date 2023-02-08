@@ -42,7 +42,7 @@ class QrcodeHelper:
         #if tipo[1:4] not in message.lower():
         message = tipo + message
 
-        font = ImageFont.truetype('arial.ttf', size_t)
+        font = ImageFont.truetype('font/arial.ttf', size_t)
         image = Image.new('RGB', size, bgColor)
         draw = ImageDraw.Draw(image)
         _, _, w, h = draw.textbbox((0, 0), message, font=font)
