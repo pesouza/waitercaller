@@ -64,7 +64,7 @@ def register():
             return render_template("home.html", loginform=LoginForm(), registrationform=form)
         salt = PH.get_salt()
         hashed = PH.get_hash(form.password2.data + salt)
-        DB.add_user(form.email.data, salt, hashed)
+        DB.add_user(form.place.data, form.email.data, salt, hashed)
         return render_template("home.html", loginform=LoginForm(), registrationform=form, onloadmessage="Registration successful. Please log in.")
     return render_template("home.html", loginform=LoginForm(), registrationform=form)
 
@@ -87,7 +87,7 @@ def dashboard():
     requests = DB.get_requests(current_user.get_id())
     for req in requests:
         deltaseconds = (now - req['time']).seconds
-        req['wait_minutes'] = "{}.{}".format((deltaseconds/60), str(deltaseconds % 60).zfill(2))
+        req['wait_minutes'] = "{}.{}".format((deltaseconds//60), str(deltaseconds % 60).zfill(2))
     return render_template("dashboard.html", requests=requests)
 
 
@@ -103,7 +103,11 @@ def dashboard_resolve():
 @login_required
 def account():
     tables = DB.get_tables(current_user.get_id())
-    return render_template("account.html", createtableform=CreateTableForm(), tables=tables)
+    user = DB.get_user(current_user.email)
+    return render_template("account.html", 
+                            createtableform=CreateTableForm(), 
+                            tables=tables,
+                            user = user)
 
 
 @app.route("/account/createtable", methods=["POST"])

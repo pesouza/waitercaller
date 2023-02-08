@@ -26,23 +26,25 @@ class QrcodeHelper:
                             #embeded_image_path=txt_img)
 
         image1_size = img.size
-        imgl = self.create_image('Link: ',link, (image1_size[0], 100), 32)
-        imgt = self.create_image('Mesa: ',text, (image1_size[0], 100), 72)
+        imgc = self.create_image('Chame o', (image1_size[0], 100), 72)
+        imgw = self.create_image('Garçom!', (image1_size[0], 100), 72, 'ariblk.ttf')
+        imgl = self.create_image(link, (image1_size[0], 100), 32)
+        imgt = self.create_image(text, (image1_size[0], 100), 72, 'ariblk.ttf')
         image2_size = imgt.size
-        new_image = Image.new('RGB',(image1_size[0], image1_size[1] + 2*image2_size[1]), (250,250,250))
-        new_image.paste(imgl,(0,0))
-        new_image.paste(img,(0,image2_size[1]))
-        new_image.paste(imgt,(0,image1_size[1] + image2_size[1]))
+        new_image = Image.new('RGB',(image1_size[0], image1_size[1] + 4*image2_size[1]), (250,250,250))
+        new_image.paste(imgc,(0, 0))
+        new_image.paste(imgw,(0, image2_size[1]))
+        new_image.paste(img,(0, 2*image2_size[1]))
+        new_image.paste(imgl,(0, image1_size[1] + 2*image2_size[1]))
+        new_image.paste(imgt,(0,image1_size[1] + 3*image2_size[1]))
 
         new_image.save(f'static/images/{text}.png')
         return f'images/{text}.png'
     
-    def create_image(self, tipo, message, size, size_t, bgColor='yellow', fontColor='black'):
+    def create_image(self, message, size, size_t, font= 'arial.ttf',
+                     bgColor='yellow', fontColor='black'):
         W, H = size
-        #if tipo[1:4] not in message.lower():
-        message = tipo + message
-
-        font = ImageFont.truetype('arial.ttf', size_t)
+        font = ImageFont.truetype(font, size_t)
         image = Image.new('RGB', size, bgColor)
         draw = ImageDraw.Draw(image)
         _, _, w, h = draw.textbbox((0, 0), message, font=font)
