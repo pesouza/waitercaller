@@ -8,6 +8,7 @@ from qrcode.image.styles.colormasks import RadialGradiantColorMask
 class QrcodeHelper:
     def gen_code(self, text, input_data):
         link = f'{input_data}'
+        text = str(text)
         #print(text, input_data)
         #txt_img = 'images/txt.png'
         #Creating an instance of qrcode
