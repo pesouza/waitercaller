@@ -41,7 +41,7 @@ class DBHelper:
 
     def add_request(self, table_id, time):
         table = self.get_table(table_id)
-        res = self.db.requests.count_documents({"owner": table['owner']},{"table_id": table_id})
+        res = self.db.requests.count_documents({"table_id": table_id})
         if res > 0:
             return False
         else:
