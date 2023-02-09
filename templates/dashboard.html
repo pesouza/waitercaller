@@ -30,9 +30,34 @@
                 </tr>
               {% endfor %}
             </table>
-            <audio autoplay>
-              <source src="{{ url_for('static', filename = 'sounds/alert.wav') }}" type="audio/mpeg" >
+            <audio id="myAudio" autoplay>
+                <source src="{{ url_for('static', filename = 'sounds/alert.wav') }}" type="audio/mpeg" >
             </audio>
+        
+            <button id="myBtn">Pause</button>
+        
+            <script>
+              const audio = document.getElementById("myAudio");
+              const btn = document.getElementById("myBtn");
+        
+              // Check if audio was paused on last visit
+              if (localStorage.getItem("audioPaused") === "true") {
+                audio.pause();
+                btn.innerHTML = "Play";
+              }
+        
+              btn.addEventListener("click", function() {
+                if (audio.paused) {
+                  audio.play();
+                  btn.innerHTML = "Pause";
+                  localStorage.setItem("audioPaused", false);
+                } else {
+                  audio.pause();
+                  btn.innerHTML = "Play";
+                  localStorage.setItem("audioPaused", true);
+                }
+              });
+            </script>
           {% else %}
             <p>All your customers are currently satisfied - no requests</p>
           {% endif %}

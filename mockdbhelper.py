@@ -48,6 +48,9 @@ class MockDBHelper:
 
     def add_request(self, table_id, time):
         table = self.get_table(table_id)
+        for item in MOCK_REQUESTS:
+            if item["table_id"] == table_id:
+                return False
         MOCK_REQUESTS.append({"_id": table_id, "owner": table[
                              "owner"], "table_number": table["number"], "table_id": table_id, "time": time})
         return True

@@ -41,11 +41,12 @@ class DBHelper:
 
     def add_request(self, table_id, time):
         table = self.get_table(table_id)
-        try:
+        exist_count=self.db.requests.find({"owner": table['owner']},{"table_id": table_id}).count()
+        if exist_count == 0:
             self.db.requests.insert_one({"owner": table['owner'], "table_number": table[
                                     'number'], "table_id": table_id, "time": time})
             return True
-        except pymongo.errors.DuplicateKeyError:
+        else:
             return False
 
     def get_requests(self, owner_id):
