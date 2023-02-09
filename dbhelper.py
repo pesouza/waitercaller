@@ -24,7 +24,7 @@ class DBHelper:
         return new_id
 
     def update_table(self, _id, url, qrc):
-        self.db.tables.updateOne({"_id": _id}, {"$set": {"url": url, "qrc": qrc}})
+        self.db.tables.update_one({"_id": _id}, {"$set": {"url": url, "qrc": qrc}})
 
     def get_tables(self, owner_id):
         return list(self.db.tables.find({"owner": owner_id}))
