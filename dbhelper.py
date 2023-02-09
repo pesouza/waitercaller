@@ -42,6 +42,7 @@ class DBHelper:
     def add_request(self, table_id, time):
         table = self.get_table(table_id)
         res = self.db.requests.find({"owner": table['owner']},{"table_id": table_id})
+        print("res: ",res)
         if res is not None:
             return False
         else:
