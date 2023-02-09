@@ -64,7 +64,7 @@ def register():
             return render_template("home.html", loginform=LoginForm(), registrationform=form)
         salt = PH.get_salt()
         hashed = PH.get_hash(form.password2.data + salt)
-        DB.add_user(form.place.data, form.email.data, salt, hashed)
+        DB.add_user(str(form.place.data), form.email.data, salt, hashed)
         return render_template("home.html", loginform=LoginForm(), registrationform=form, onloadmessage="Registration successful. Please log in.")
     return render_template("home.html", loginform=LoginForm(), registrationform=form)
 
