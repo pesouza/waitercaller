@@ -20,8 +20,8 @@ class DBHelper:
                                 "salt": salt, "hashed": hashed})
 
     def add_table(self, number, owner):
-        new_id = self.db.tables.insertOne({"number": number, "owner": owner})
-        return new_id.insertedId.toString()
+        new_id = self.db.tables.insert_one({"number": number, "owner": owner}).inserted_id
+        return new_id.toString()
 
     def update_table(self, _id, url, qrc):
         self.db.tables.update_one({"_id": ObjectId(_id)}, {"$set": {"url": url, "qrc": qrc}})
