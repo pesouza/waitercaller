@@ -41,8 +41,8 @@ class QrcodeHelper:
         new_image.paste(imgl,(0, image1_size[1] + 2*image2_size[1]))
         new_image.paste(imgt,(0,image1_size[1] + 3*image2_size[1]))
 
-        new_image.save(f'{IMAGES_PATH}/{text}.png')
-        return 'images/' + text + '.png'
+        new_image.save(f'{IMAGES_PATH}/{link[15:]}.png')
+        return f'images/{link[15:]}.png'
     
     def create_image(self, message, size, size_t, font= 'arial',
                      bgColor='yellow', fontColor='black'):
