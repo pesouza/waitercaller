@@ -4,19 +4,31 @@
     <style>
       body {
         background-color: {{ background_color }};
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
       }
 
       h1 {
         color: white;
       }
+      .container {
+        display: flex;
+        align-items: center;
+        height: 100vh;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      img {
+        height: 50%;
+        width: 50%;
+      }
     </style>
   </head>
   <body>
-    <h1>{{ message }}</h1>
+    <div class="container">
+        <h1>{{ message }}</h1>
+        <br>
+        <img src="{{ url_for('static', filename = image) }}" alt="Image">
+    </div>
     <audio autoplay>
         <source src="{{ url_for('static', filename = sound) }}" type="audio/mpeg" >
     </audio>

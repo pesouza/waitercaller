@@ -24,10 +24,8 @@ class QrcodeHelper:
         img = qr.make_image(fill='black', back_color='white')
 
         img = qr.make_image(image_factory=StyledPilImage, 
-                            #module_drawer=RoundedModuleDrawer(),
-                            color_mask=RadialGradiantColorMask(),)
-                            #embeded_image_path=txt_img)
-
+                            color_mask=RadialGradiantColorMask())
+    
         image1_size = img.size
         imgc = self.create_image('Chame o', (image1_size[0], 100), 72)
         imgw = self.create_image('Garçom!', (image1_size[0], 100), 72, 'ariblk')

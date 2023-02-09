@@ -134,17 +134,19 @@ def account_deletetable():
 @app.route("/newrequest/<tid>")
 def new_request(tid):
     if DB.add_request(tid, datetime.datetime.now()):
-        message = "Your request has been logged and a waiter will be with you shortly"
+        message = "A waiter is comming"
         background_color = "green"
         sound = 'sounds/ok.wav'
+        image = 'images/ok.png'
     else:
-        message = "There is already a request pending for this table. Please be patient, a waiter will be there ASAP"
+        message = "Please be patient, a waiter will be there ASAP"
         background_color = "red"
         sound = 'sounds/again.wav'
+        image = 'images/again.png'
 
     return render_template("request.html", message=message, 
                             background_color=background_color,
-                            sound=sound)
+                            sound=sound, image=image)
 
 if __name__ == '__main__':
     app.run(debug=True)
