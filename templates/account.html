@@ -24,8 +24,8 @@
                   <tr>
                     <td>{{table.number}}</td> 
                     <td>{{table.url}}</td>
-                    <td><a href="{{url_for('static', filename=table.code)}}" target="_blank">
-                      <img src="{{url_for('static', filename=table.code)}}" width="50"></a></td> 
+                    <td><a href="{{url_for('static', filename=table.qrc)}}" target="_blank">
+                      <img src="{{url_for('static', filename=table.qrc)}}" width="50"></a></td> 
                     <td> <input type="submit" value="Delete" class="form-control"></td>
                     <input type="text" name="tableid" value="{{table._id}}" hidden> 
                   </tr>

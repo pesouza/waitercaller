@@ -42,7 +42,7 @@ class QrcodeHelper:
         new_image.paste(imgt,(0,image1_size[1] + 3*image2_size[1]))
 
         new_image.save(f'{IMAGES_PATH}/{text}.png')
-        return '/images/' + text + '.png'
+        return 'images/' + text + '.png'
     
     def create_image(self, message, size, size_t, font= 'arial',
                      bgColor='yellow', fontColor='black'):
