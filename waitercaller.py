@@ -118,7 +118,7 @@ def account_createtable():
         tableid = DB.add_table(form.tablenumber.data, current_user.get_id())
         new_url = BH.shorten_url(config.base_url + "/newrequest/" + str(tableid))
         new_qrc = QH.gen_code(form.tablenumber.data, new_url)
-        DB.update_table(str(tableid), new_url, new_qrc)
+        DB.update_table(tableid, new_url, new_qrc)
         return redirect(url_for('account'))
     return render_template("account.html", createtableform=form, tables=DB.get_tables(current_user.get_id()))
 
