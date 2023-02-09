@@ -42,8 +42,7 @@ class DBHelper:
     def add_request(self, table_id, time):
         table = self.get_table(table_id)
         res = self.db.requests.find({"owner": table['owner']},{"table_id": table_id})
-        print("res: ",res)
-        if res is not None:
+        if res.count() > 0:
             return False
         else:
             self.db.requests.insert_one({"owner": table['owner'], "table_number": table[
