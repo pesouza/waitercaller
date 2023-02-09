@@ -21,10 +21,10 @@ class DBHelper:
 
     def add_table(self, number, owner):
         new_id = self.db.tables.insert_one({"number": number, "owner": owner}).inserted_id
-        return new_id.toString()
+        return new_id
 
     def update_table(self, _id, url, qrc):
-        self.db.tables.update_one({"_id": ObjectId(_id)}, {"$set": {"url": url, "qrc": qrc}})
+        self.db.tables.update_one({"_id": _id}, {"$set": {"url": url, "qrc": qrc}})
 
     def get_tables(self, owner_id):
         return list(self.db.tables.find({"owner": owner_id}))
