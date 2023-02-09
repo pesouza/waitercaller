@@ -2,9 +2,10 @@
 import os
 import pymongo
 from bson import ObjectId
+from os.path import join, dirname, realpath
 
 DATABASE = "waitercaller"
-
+IMAGES_PATH = join(dirname(realpath(__file__)), 'static')
 
 class DBHelper:
 
@@ -33,6 +34,9 @@ class DBHelper:
         return self.db.tables.find_one({"_id": ObjectId(table_id)})
 
     def delete_table(self, table_id):
+        table = self.get_table(table_id)
+        if os.path.exists(f'{IMAGES_PATH}/{table["qrc"]}'):
+            os.remove(f'{IMAGES_PATH}/{table["qrc"]}')
         self.db.tables.delete_one({"_id": ObjectId(table_id)})
 
     def add_request(self, table_id, time):
