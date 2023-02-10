@@ -8,6 +8,8 @@ from flask import request
 from flask import url_for
 
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from flask_mail import Mail, Message
+import uuid
 
 import config
 if config.test:
@@ -29,11 +31,31 @@ app = Flask(__name__)
 app.secret_key = "Gxf613UhGRkzAKd47R5daLrUelnlUL4L6AU4z0uu++TNBpdzhAolufHqPQiiEdn34pbE97bmXbN"
 login_manager = LoginManager(app)
 
+mail = Mail(app)
+
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USERNAME"] = config.email
+app.config["MAIL_PASSWORD"] = config.pwd
+
 DB = DBHelper()
 PH = PasswordHelper()
 BH = BitlyHelper()
 QH = QrcodeHelper()
 
+def generate_confirmation_token():
+    return str(uuid.uuid4().hex)
+
+def send_confirmation_email(email, token):
+    msg = Message(
+        "Confirme seu endereço de e-mail",
+        recipients=[email],
+        
+        html=render_template("confirm_email.html", 
+                            confirm_url=f'{config.base_url}/confirm/{token}'),
+    )
+    mail.send(msg)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -47,11 +69,11 @@ def login():
     form = LoginForm(request.form)
     if form.validate():
         stored_user = DB.get_user(form.loginemail.data)
-        if stored_user and PH.validate_password(form.loginpassword.data, stored_user['salt'], stored_user['hashed']):
+        if stored_user and PH.validate_password(form.loginpassword.data, stored_user['salt'], stored_user['hashed']) and stored_user['confirmed']:
             user = User(form.loginemail.data)
             login_user(user, remember=True)
             return redirect(url_for('account'))
-        form.loginemail.errors.append("Email or password invalid")
+        form.loginemail.errors.append("E-mail ou senha inválido")
     return render_template("home.html", loginform=form, registrationform=RegistrationForm())
 
 
@@ -60,20 +82,29 @@ def register():
     form = RegistrationForm(request.form)
     if form.validate():
         if DB.get_user(form.email.data):
-            form.email.errors.append("Email address already registered")
+            form.email.errors.append("Endereço de e-mail já registrado")
             return render_template("home.html", loginform=LoginForm(), registrationform=form)
         salt = PH.get_salt()
         hashed = PH.get_hash(form.password2.data + salt)
-        DB.add_user(str(form.place.data), form.email.data, salt, hashed)
-        return render_template("home.html", loginform=LoginForm(), registrationform=form, onloadmessage="Registration successful. Please log in.")
+        token = generate_confirmation_token()
+        DB.add_user(str(form.place.data), form.email.data, salt, hashed, token)
+
+        send_confirmation_email(form.email.data, token)
+
+        return render_template("home.html", loginform=LoginForm(), registrationform=form, onloadmessage="Registro bem sucedido! Verifique sua caixa postal.")
     return render_template("home.html", loginform=LoginForm(), registrationform=form)
 
+@app.route("/confirm/<token>")
+def confirm_email(token):
+    if DB.confirm_email(token):
+        return "Seu email foi confirmado!"
+    else:
+        return "Token inválido!"
 
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for("home"))
-
 
 @app.route("/")
 def home():
@@ -134,12 +165,12 @@ def account_deletetable():
 @app.route("/newrequest/<tid>")
 def new_request(tid):
     if DB.add_request(tid, datetime.datetime.now()):
-        message = "A waiter is comming"
+        message = "Seu garçom está a caminho!"
         background_color = "green"
         sound = 'sounds/ok.wav'
         image = 'images/ok.png'
     else:
-        message = "Please be patient, a waiter will be there ASAP"
+        message = "Por favor, seja paciente. Você será atendido o mais rápido possível!"
         background_color = "red"
         sound = 'sounds/again.wav'
         image = 'images/again.png'
@@ -147,6 +178,7 @@ def new_request(tid):
     return render_template("request.html", message=message, 
                             background_color=background_color,
                             sound=sound, image=image)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

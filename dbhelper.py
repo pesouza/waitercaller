@@ -16,9 +16,18 @@ class DBHelper:
     def get_user(self, email):
         return self.db.users.find_one({"email": email})
 
-    def add_user(self, place, email, salt, hashed):
+    def add_user(self, place, email, salt, hashed, token):
         self.db.users.insert_one({"place": place,  "email": email, 
-                                "salt": salt, "hashed": hashed})
+                                "salt": salt, "hashed": hashed, 
+                                "confirmed": False, "token": token})
+
+    def confirm_email(self, token):
+        _id = self.db.users.find_one({"token": token}).inserted_id
+        if _id:
+            self.db.users.update_one({"_id": _id}, {"$set": {"token": None, "confirmed": True}})
+            return True
+        return False
+
 
     def add_table(self, number, owner):
         new_id = self.db.tables.insert_one({"number": number, "owner": owner}).inserted_id
