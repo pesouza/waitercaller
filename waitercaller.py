@@ -31,14 +31,14 @@ app = Flask(__name__)
 app.secret_key = "Gxf613UhGRkzAKd47R5daLrUelnlUL4L6AU4z0uu++TNBpdzhAolufHqPQiiEdn34pbE97bmXbN"
 login_manager = LoginManager(app)
 
-mail = Mail(app)
-
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 465 #587
 app.config["MAIL_USE_TLS"] = False #True
 app.config['MAIL_USE_SSL'] = True
 app.config["MAIL_USERNAME"] = config.email
 app.config["MAIL_PASSWORD"] = config.pwd
+
+mail = Mail(app)
 
 DB = DBHelper()
 PH = PasswordHelper()
