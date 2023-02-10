@@ -1,4 +1,3 @@
-#!/usr/local/environments/flask/lib/python3.6
 import os
 import pymongo
 from bson import ObjectId
@@ -23,7 +22,7 @@ class DBHelper:
 
     def confirm_email(self, token):
         user = self.db.users.find_one({"token": token})
-        if user._id:
+        if user['_id']:
             self.db.users.update_one({"_id": _id}, {"$set": {"token": None, "confirmed": True}})
             return True
         return False

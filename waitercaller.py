@@ -1,4 +1,4 @@
-#!/usr/local/environments/flask/lib/python3.6
+#!/usr/local/envs/flask/lib/python3.10
 import datetime
 
 from flask import Flask
