@@ -50,8 +50,8 @@ def generate_confirmation_token():
 def send_confirmation_email(email, token):
     msg = Message(
         "Confirme seu endereço de e-mail",
-        recipients=[email],
-        
+        sender = config.email,
+        recipients=[email],        
         html=render_template("confirm_email.html", 
                             confirm_url=f'{config.base_url}/confirm/{token}'),
     )
