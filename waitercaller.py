@@ -51,7 +51,6 @@ def generate_confirmation_token():
 def send_confirmation_email(email, token):
     msg = Message(
         "Confirme seu endereço de e-mail",
-        subject='testing',
         sender = ('Paulo Souza', config.email),
         recipients=[email],        
         html=render_template("confirm_email.html", 
