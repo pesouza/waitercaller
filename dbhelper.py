@@ -22,8 +22,8 @@ class DBHelper:
                                 "confirmed": False, "token": token})
 
     def confirm_email(self, token):
-        _id = self.db.users.find_one({"token": token}).inserted_id
-        if _id:
+        user = self.db.users.find_one({"token": token})
+        if user._id:
             self.db.users.update_one({"_id": _id}, {"$set": {"token": None, "confirmed": True}})
             return True
         return False
