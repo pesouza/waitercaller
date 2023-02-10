@@ -34,8 +34,9 @@ login_manager = LoginManager(app)
 mail = Mail(app)
 
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 587
-app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_PORT"] = 465 #587
+app.config["MAIL_USE_TLS"] = False #True
+app.config['MAIL_USE_SSL'] = True
 app.config["MAIL_USERNAME"] = config.email
 app.config["MAIL_PASSWORD"] = config.pwd
 
@@ -50,7 +51,8 @@ def generate_confirmation_token():
 def send_confirmation_email(email, token):
     msg = Message(
         "Confirme seu endereço de e-mail",
-        sender = config.email,
+        subject='testing',
+        sender = ('Paulo Souza', config.email),
         recipients=[email],        
         html=render_template("confirm_email.html", 
                             confirm_url=f'{config.base_url}/confirm/{token}'),
