@@ -54,7 +54,7 @@ def send_confirmation_email(email, token):
         sender = ('Paulo Souza', config.email),
         recipients=[email],        
         html=render_template("confirm_email.html", 
-                            confirm_url=f'{config.base_url}/confirm/{token}'),
+                            confirm_url=f'{config.base_url}confirm/{token}'),
     )
     mail.send(msg)
 
