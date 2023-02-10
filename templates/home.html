@@ -48,23 +48,24 @@
 {% block content %}
     <div class="jumbotron">
       <div class="container">
-        <h1>Waiter Caller</h1>
-        <p>Your patrons can call their waiter anytime, using only their phone</p>
+        <h1>Chane o Garçom</h1>
+        <p>Seus clientes podem chamar o garçom a qualquer momento, usando apenas o telefone, sem instalar nem aplicativo!</p>
       </div>
     </div>
 
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <h2>Simple</h2>
-          <p>Just print out the URLs and put them on the tables of your restaurant. No specialized hardware required. </p>
+          <h2>Simples</h2>
+          <p>JBasta imprimir os QRCodes e colocá-los nas mesas do seu estabelecimento. Nenhum hardware especializado é necessário. </p>
+          <img src="{{ url_for('static', filename = 'images/1.png') }}" alt="QRCode">
         </div>
         <div class="col-md-4">
-          <h2>Cost effective</h2>
-          <p>No need to buy hardware either for your tables or for your kitchen. Management and usage all directly from this page.</p>
+          <h2>Custo-beneficio</h2>
+          <p>Não há necessidade de comprar hardware para suas mesas ou para sua cozinha. Gerenciamento e uso diretamente desta página.</p>
        </div>
         <div class="col-md-4">
-          <h2>Register now</h2>
+          <h2>Registre-se já</h2>
           <form class="form-horizontal" action="/register" method="POST">
             {{ registrationform.csrf_token }}
             <div class="form-group">
@@ -72,7 +73,7 @@
                 {% if registrationform.place.errors %}
                   <ul class="errors">{% for error in registrationform.place.errors %}<li>{{ error }}</li>{% endfor %}</ul>
                 {% endif %}
-                {{ registrationform.place(class="form-control", placeholder="Place" )}}
+                {{ registrationform.place(class="form-control", placeholder="Estabelecimento" )}}
               </div>
             </div>
             <div class="form-group">
@@ -80,7 +81,7 @@
                 {% if registrationform.email.errors %}
                   <ul class="errors">{% for error in registrationform.email.errors %}<li>{{ error }}</li>{% endfor %}</ul>
                 {% endif %}
-                {{ registrationform.email(class="form-control", placeholder="Email Address" )}}
+                {{ registrationform.email(class="form-control", placeholder="E-mail" )}}
               </div>
             </div>
             <div class="form-group">
@@ -88,7 +89,7 @@
                 {% if registrationform.password.errors %}
                   <ul class="errors">{% for error in registrationform.password.errors %}<li>{{ error }}</li>{% endfor %}</ul>
                 {% endif %}
-                {{ registrationform.password(class="form-control", placeholder="Password" )}}
+                {{ registrationform.password(class="form-control", placeholder="Senha" )}}
               </div>
             </div>
             <div class="form-group">
@@ -96,7 +97,7 @@
                 {% if registrationform.password2.errors %}
                   <ul class="errors">{% for error in registrationform.password2.errors %}<li>{{ error }}</li>{% endfor %}</ul>
                 {% endif %}
-                {{ registrationform.password2(class="form-control", placeholder="Confirm Password" )}}
+                {{ registrationform.password2(class="form-control", placeholder="Confirme a senha" )}}
               </div>
             </div> 
             <div class="form-group">

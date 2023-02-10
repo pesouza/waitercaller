@@ -10,15 +10,15 @@ class RegistrationForm(Form):
     place = StringField('place', validators=[validators.DataRequired()])
     email = EmailField('email', validators=[validators.DataRequired(), validators.Email()])
     password = PasswordField('password', validators=[validators.DataRequired(), 
-                              validators.Length(min=8, message="Please choose a password of at least 8 characters")])
+                              validators.Length(min=8, message="Use uma senha com pelo menos 8 caracteres")])
     password2 = PasswordField('password2', validators=[validators.DataRequired(), 
-                               validators.EqualTo('password', message='Passwords must match')])
+                               validators.EqualTo('password', message='As senhas precisam ser iguais')])
     submit = SubmitField('submit', [validators.DataRequired()])
 
 
 class LoginForm(Form):
     loginemail = EmailField('email', validators=[validators.DataRequired(), validators.Email()])
-    loginpassword = PasswordField('password', validators=[validators.DataRequired(message="Password field is required")])
+    loginpassword = PasswordField('password', validators=[validators.DataRequired(message="A senha é requerida")])
     submit = SubmitField('submit', [validators.DataRequired()]) 
 
 

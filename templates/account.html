@@ -3,21 +3,21 @@
 {% block content %}
     <div class="jumbotron">
       <div class="container">
-        <h1>{{user.place}} account</h1>
-        <p>Manage tables and get URLs</p>
+        <h1>{{user.place}}</h1>
+        <p>Gerencie suas mesas e gere as URLs</p>
       </div>
     </div>
 
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>Tables</h2>
+          <h2>Mesas</h2>
             <table class="table table-striped">
               <tr>
                 <th>No.</th>
                 <th>URL</th>
-                <th>QRC</th>
-                <th>Delete</th>
+                <th>QRCode</th>
+                <th>Apagar</th>
               </tr> 
               {% for table in tables %}
                 <form class="form-inline" action="/account/deletetable">
@@ -33,7 +33,7 @@
               {% endfor %}
             </table>
 
-          <h2>Add new table</h2>
+          <h2>Adicione uma nova mesa</h2>
           <form class="form-inline" action="/account/createtable" method="POST">
             <div class="form-group">
               {% if createtableform.tablenumber.errors %} 
@@ -44,7 +44,7 @@
                 </ul> 
               {% endif %}
               {{ createtableform.csrf_token}}
-              {{ createtableform.tablenumber(class="form-control", placeholder="Table number or name")}}
+              {{ createtableform.tablenumber(class="form-control", placeholder="Número ou nome da mesa")}}
               {{ createtableform.submit(value="Create", class="btn btn-primary") }}
             </div>
           </form>

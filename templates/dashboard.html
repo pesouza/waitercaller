@@ -3,21 +3,21 @@
 {% block content %}
     <div class="jumbotron">
       <div class="container">
-        <h1>Dashboard</h1>
-        <p>View all patron requests below</p>
+        <h1>Controle de chamados</h1>
+        <p>Veja todos os chamados abaixo</p>
       </div>
     </div>
 
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>Requests</h2>
+          <h2>Chamados</h2>
           {% if requests %}
             <table class="table table-striped">
               <tr>
                 <th>No.</th>
-                <th>Wait</th>
-                <th>Resolve</th>
+                <th>Tempo de espera</th>
+                <th>Atender</th>
               </tr>
               {% for request in requests %}
                 <tr>
@@ -25,7 +25,7 @@
                     <td>{{request.table_number}}</td>
                     <td>{{request.wait_minutes}}</td> 
                     <input type="text" name="request_id" value="{{request._id}}" hidden>
-                    <td><input type="submit" value="Resolve" class="btn btn-primary"></td>
+                    <td><input type="submit" value="Atender" class="btn btn-primary"></td>
                   </form>
                 </tr>
               {% endfor %}
@@ -34,7 +34,7 @@
                 <source src="{{ url_for('static', filename = 'sounds/alert.wav') }}" type="audio/mpeg" >
             </audio>
         
-            <button id="myBtn">Pause</button>
+            <button id="myBtn">Pausar a campainha</button>
         
             <script>
               const audio = document.getElementById("myAudio");
@@ -43,23 +43,23 @@
               // Check if audio was paused on last visit
               if (localStorage.getItem("audioPaused") === "true") {
                 audio.pause();
-                btn.innerHTML = "Play";
+                btn.innerHTML = "Ativar a campainha";
               }
         
               btn.addEventListener("click", function() {
                 if (audio.paused) {
                   audio.play();
-                  btn.innerHTML = "Pause";
+                  btn.innerHTML = "Pausar a campainha";
                   localStorage.setItem("audioPaused", false);
                 } else {
                   audio.pause();
-                  btn.innerHTML = "Play";
+                  btn.innerHTML = "Ativar a campainha";
                   localStorage.setItem("audioPaused", true);
                 }
               });
             </script>
           {% else %}
-            <p>All your customers are currently satisfied - no requests</p>
+            <p>Todos os clientes estão satisfeitos no momento - nenhum chamado!</p>
           {% endif %}
         </div>    
       </div>
