@@ -9,8 +9,11 @@ from os.path import join, dirname, realpath
 IMAGES_PATH = join(dirname(realpath(__file__)), 'static', 'images')
 
 class QrcodeHelper:
-    def gen_code(self, text, input_data, tableid):
-        link = f'{input_data}'
+    def gen_code(self, text, input_data, long_url, tableid):
+        
+        if not 'https://bit.ly/' in input_data: 
+            input_data = long_url
+        #link = f'{input_data}' 
         link1 = '\xa9 waiterexpress.com.br'
         text = str(text)
  

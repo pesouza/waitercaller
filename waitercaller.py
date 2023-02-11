@@ -159,9 +159,9 @@ def account_createtable():
     form = CreateTableForm(request.form)
     if form.validate():
         tableid = DB.add_table(form.tablenumber.data, current_user.get_id())
-        #new_url = BH.shorten_url(config.base_url + "/newrequest/" + str(tableid))
-        new_url = f'{config.base_url}/newrequest/{tableid}'
-        new_qrc = QH.gen_code(form.tablenumber.data, new_url, tableid)
+        new_url = BH.shorten_url(config.base_url + "/newrequest/" + str(tableid))
+        long_url = f'{config.base_url}/newrequest/{tableid}'
+        new_qrc = QH.gen_code(form.tablenumber.data, new_url, long_url, tableid)
         DB.update_table(tableid, new_url, new_qrc)
         return redirect(url_for('account'))
     return render_template("account.html", createtableform=form, tables=DB.get_tables(current_user.get_id()))
