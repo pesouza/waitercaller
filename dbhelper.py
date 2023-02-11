@@ -62,7 +62,7 @@ class DBHelper:
             self.db.requests.insert_one({"owner": table['owner'], "table_number": table[
                                     'number'], "table_id": table_id, "time": time})
             if table['owner'] == 'mail@exemplo.com.br':
-                self.db.requests.update_one({"_id": table_id}, {"$set": {"expire_time": time() + expire_time}})
+                self.db.requests.update_one({"table_id": table_id}, {"$set": {"expire_time": time() + expire_time}})
             
             return True
 
