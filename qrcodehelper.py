@@ -29,7 +29,7 @@ class QrcodeHelper:
         image1_size = img.size
         imgc = self.create_image('Chame o', (image1_size[0], 100), 72)
         imgw = self.create_image('Garçom!', (image1_size[0], 100), 72, 'ariblk')
-        imgl = self.create_image(link, (image1_size[0], 100), 32)
+        imgl = self.create_image(link, (image1_size[0], 100), 28)
         imgt = self.create_image(text, (image1_size[0], 100), 72, 'ariblk')
         image2_size = imgt.size
         new_image = Image.new('RGB',(image1_size[0], image1_size[1] + 4*image2_size[1]), (250,250,250))
