@@ -1,4 +1,49 @@
 {% extends "base.html" %}
+{% block bodytag %}
+  <body {% if onloadmessage %} onload="alert('{{onloadmessage}}');" {% endif %}>
+{% endblock %}
+
+
+{% block navbar %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Home</a>
+          <a class="navbar-brand" href="/contact">Contato</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right" action="/login" method="POST">
+            {% if loginform.errors %}
+              <ul class="errors">
+                {% for field_name, field_errors in loginform.errors|dictsort if field_errors %}
+                  {% for error in field_errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {{ loginform.csrf_token}}
+            <div class="form-group">
+              {{ loginform.loginemail(class="form-control", placeholder="E-mail")}}
+            </div>
+            <div class="form-group">
+              {{ loginform.loginpassword(class="form-control", placeholder="Senha")}}
+            </div>
+            <div class="form-group">
+              {{ loginform.submit(value="Entrar", class="btn btn-success")}}
+            </div>
+          </form>
+
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+{% endblock %}
 
 {% block content %}
 <div class="container">
