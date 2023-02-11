@@ -36,7 +36,8 @@ class DBHelper:
 
     def update_table(self, _id, url, qrc):
         self.db.tables.update_one({"_id": _id}, {"$set": {"url": url, "qrc": qrc}})
-        if owner_id == self.get_user('mail@exemplo.com.br'):
+        table = self.get_table(_id)
+        if table['owner'] == self.get_user('mail@exemplo.com.br'):
             self.db.tables.update_one({"_id": _id}, {"$set": {"expire_time": time() + expire_time}})
         
 
