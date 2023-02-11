@@ -2,8 +2,8 @@
 
 {% block content %}
 <div class="container">
-    <h1>Contact Us</h1>
-    <form method="POST" action="{{ url_for('home') }}">
+    <h1>Fale conosco</h1>
+    <form class="navbar-form navbar-right" action="/enviar" method="POST">
         {{ form.csrf_token }}
           
         <p>
