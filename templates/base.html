@@ -45,6 +45,30 @@
                           url("{{ url_for('static', filename='site/PngItem_364086.png') }}");
         background-size: cover;
       }
+      .grid-container {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      background-color: #2196F3;
+      grid-gap: 10px;
+    }
+    .grid-item {
+      //background-color: lightgray;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid black;
+      padding: 20px;
+      text-align: center;
+    }
+    .grid-item input[type="submit"] {
+      width: 100%;
+      height: 100%;
+      background-color: lightblue;
+      border: none;
+    }
+    @media (max-width: 767px) {
+      .grid-container {
+        grid-template-columns: auto;
+      }
+    }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4751689877189904"
     crossorigin="anonymous"></script>
