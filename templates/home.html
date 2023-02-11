@@ -48,6 +48,7 @@
 {% block content %}
     <div class="jumbotron">
       <div class="container">
+        <img src="{{ url_for('static', filename = 'site/handsup.png') }}" class="rounded float-left" alt="Hands Up">
         <h1>Hands up - Chame o Garçom!</h1>
         <p>Seus clientes podem solicitar a presença do garçom a qualquer momento, simplesmente usando o telefone, sem a necessidade de baixar nenhum aplicativo!</p>
       </div>
@@ -62,6 +63,7 @@
           <!--center><img src="{{ url_for('static', filename = 'site/1.png') }}" class="img-fluid img-thumbnail" alt="QRCode"></center-->
         </div>
         <div class="col-md-4">
+          <img src="{{ url_for('static', filename = 'site/custo.jpg') }}" class="img-fluid img-thumbnail" alt="Simples">
           <h2>Custo-beneficio</h2>
           <p>Não há necessidade de comprar equipamentos adicionais para suas mesas ou para sua cozinha. Com esta página, você pode gerenciá-las diretamente daqui.</p>
           <br>
