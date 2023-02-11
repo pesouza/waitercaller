@@ -53,14 +53,14 @@ class DBHelper:
             os.remove(f'{IMAGES_PATH}/{table["qrc"]}')
         self.db.tables.delete_one({"_id": ObjectId(table_id)})
 
-    def add_request(self, table_id, time):
+    def add_request(self, table_id, dtime):
         table = self.get_table(table_id)
         res = self.db.requests.count_documents({"table_id": table_id})
         if res > 0:
             return False
         else:
             self.db.requests.insert_one({"owner": table['owner'], "table_number": table[
-                                    'number'], "table_id": table_id, "time": time})
+                                    'number'], "table_id": table_id, "time": dtime})
             if table['owner'] == 'mail@exemplo.com.br':
                 self.db.requests.update_one({"table_id": table_id}, {"$set": {"expire_time": time() + expire_time}})
             
