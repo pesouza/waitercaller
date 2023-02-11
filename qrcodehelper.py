@@ -11,7 +11,7 @@ IMAGES_PATH = join(dirname(realpath(__file__)), 'static', 'images')
 class QrcodeHelper:
     def gen_code(self, text, input_data):
         #link = f'{input_data}'
-        link = 'waiterexpress.com.br'
+        link = '\xa9 waiterexpress.com.br'
         text = str(text)
  
         #Creating an instance of qrcode
