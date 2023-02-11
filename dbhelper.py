@@ -6,7 +6,7 @@ from time import time
 
 DATABASE = "waitercaller"
 IMAGES_PATH = join(dirname(realpath(__file__)), 'static')
-expire_time = 60
+expire_time = 15*60
 
 class DBHelper:
 
