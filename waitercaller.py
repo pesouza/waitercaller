@@ -182,10 +182,9 @@ def new_request(tid):
                             background_color=background_color,
                             sound=sound, image=image)
 
-@app.route("/contact", methods=["POST"])
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    cform = ContactForm()
-    return render_template("contact.html", form=cform)
+    return render_template("contact.html", form=ContactForm())
 
 if __name__ == '__main__':
     app.run()
