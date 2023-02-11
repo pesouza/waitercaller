@@ -184,7 +184,13 @@ def new_request(tid):
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
-    return render_template("contact.html", form=ContactForm())
+    form = ContactForm(request.form)
+    if form.validate():
+
+        send_contact_email(form.name.data, form.email.data, form.message.data)
+
+        return render_template("contact.html", form=form, onloadmessage="Agradecemos o seu contato. Responderemos ASAP.")
+    return render_template("contact.html", form=form)
 
 if __name__ == '__main__':
     app.run()

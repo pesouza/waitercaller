@@ -14,7 +14,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Home</a>
+          <a class="navbar-brand" href="/">Home</a>
           <a class="navbar-brand" href="/contact">Contato</a>
         </div>
       </div>
@@ -31,7 +31,7 @@
 
 <div class="container">
     <h1>Fale conosco</h1>
-    <form class="form-horizontal" action="/enviar" method="POST">
+    <form class="form-horizontal" action="/contact" method="POST">
         {% if form.errors %}
         <ul class="errors">
           {% for field_name, field_errors in form.errors|dictsort if field_errors %}
