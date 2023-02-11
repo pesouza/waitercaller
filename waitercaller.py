@@ -60,6 +60,15 @@ def send_confirmation_email(email, token):
     )
     mail.send(msg)
 
+def send_contact_email(name, email, msg):
+    msg = Message(
+        f"Contado de {name}",
+        sender = (name, email),
+        recipients = [config.email],        
+        body = msg
+    )
+    mail.send(msg)
+
 @login_manager.user_loader
 def load_user(user_id):
     user_password = DB.get_user(user_id)
