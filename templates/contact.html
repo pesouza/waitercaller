@@ -32,15 +32,6 @@
 <div class="container">
     <h1>Fale conosco</h1>
     <form class="form-horizontal" action="/contact" method="POST">
-        {% if form.errors %}
-        <ul class="errors">
-          {% for field_name, field_errors in form.errors|dictsort if field_errors %}
-            {% for error in field_errors %}
-              <li>{{ error }}</li>
-            {% endfor %}
-          {% endfor %}
-        </ul>
-        {% endif %}
         {{ form.csrf_token }}
           
         <div class="form-group">
