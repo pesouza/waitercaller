@@ -26,6 +26,7 @@ from user import User
 from forms import RegistrationForm
 from forms import LoginForm
 from forms import CreateTableForm
+from forms import ContactForm
 
 
 app = Flask(__name__)
@@ -181,6 +182,10 @@ def new_request(tid):
                             background_color=background_color,
                             sound=sound, image=image)
 
+@app.route("/contact", methods=["POST"])
+def contact():
+    cform = ContactForm()
+    return render_template("contact.html", form=cform)
 
 if __name__ == '__main__':
     app.run()
