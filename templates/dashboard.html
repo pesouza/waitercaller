@@ -18,9 +18,9 @@
               {% for request in requests %}
                 <div class="grid-item">
                   <form class="form-inline" action="/dashboard/resolve">
-                    {{request.table_number}}
+                    <h3>Mesa: {{request.table_number}}</h3>
                     <br>
-                    {{request.wait_minutes}}
+                    <p>Espera:<bold>{{request.wait_minutes}}</bold> minutos</p>
                     <br>
                     <input type="text" name="request_id" value="{{request._id}}" hidden>
                     <input type="submit" value="Atender" class="btn btn-primary">
