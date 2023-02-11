@@ -170,12 +170,12 @@ def new_request(tid):
         message = "Seu garçom está a caminho!"
         background_color = "green"
         sound = 'sounds/ok.wav'
-        image = 'images/ok.png'
+        image = 'site/ok.png'
     else:
         message = "Por favor, seja paciente. Você será atendido o mais rápido possível!"
         background_color = "red"
         sound = 'sounds/again.wav'
-        image = 'images/again.png'
+        image = 'site/again.png'
 
     return render_template("request.html", message=message, 
                             background_color=background_color,

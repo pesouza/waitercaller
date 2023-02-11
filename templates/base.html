@@ -40,7 +40,10 @@
         padding: 0;
         color: red;
       }
-  
+      .jumbotron {
+        background-image: url("{{ url_for('static', filename='site/PngItem_364086.png') }}");
+        background-size: cover;
+      }
     </style>
   </head>
   {% block bodytag %}
@@ -66,7 +69,7 @@
     <div class="container">
 
       <hr>
-      <footer>
+      <footer class="container">
         <p>&copy; Aer.IA 2023</p>
       </footer>
     </div>
