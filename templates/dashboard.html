@@ -1,4 +1,28 @@
 {% extends "base.html" %}
+
+
+{% block styles %}
+  <style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 10px;
+    }
+    .grid-item {
+      background-color: lightgray;
+      border: 1px solid black;
+      padding: 20px;
+      text-align: center;
+    }
+    .grid-item input[type="submit"] {
+      width: 100%;
+      height: 100%;
+      background-color: lightblue;
+      border: none;
+    }
+  </style>
+{% endblock %}
+
 {% block metarefresh %} <meta http-equiv="refresh" content="10" > {% endblock %}
 {% block content %}
     <div class="jumbotron">
@@ -13,7 +37,7 @@
         <div class="col-md-12">
           <h2>Chamados</h2>
           {% if requests %}
-            <table class="table table-striped">
+            <!--table class="table table-striped">
               <tr>
                 <th>No.</th>
                 <th>Tempo de espera</th>
@@ -29,7 +53,21 @@
                   </form>
                 </tr>
               {% endfor %}
-            </table>
+            </table-->
+            <div class="grid-container">
+              {% for request in requests %}
+                <div class="grid-item">
+                  <form class="form-inline" action="/dashboard/resolve">
+                    {{request.table_number}}
+                    <br>
+                    {{request.wait_minutes}}
+                    <br>
+                    <input type="text" name="request_id" value="{{request._id}}" hidden>
+                    <input type="submit" value="Atender" class="btn btn-primary">
+                  </form>
+                </div>
+              {% endfor %}
+            </div>
             <audio id="myAudio" autoplay>
                 <source src="{{ url_for('static', filename = 'sounds/alert.wav') }}" type="audio/mpeg" >
             </audio>
