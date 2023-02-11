@@ -198,8 +198,9 @@ def contact():
 
         send_contact_email(form.name.data, form.email.data, form.message.data)
 
-        return render_template("contact.html", form=form, onloadmessage="Agradecemos o seu contato. Responderemos ASAP.")
-    return render_template("contact.html", form=form)
+        return render_template("contact.html", form=RegistrationForm(), 
+                                onloadmessage="Agradecemos o seu contato. Responderemos ASAP.")
+    return render_template("contact.html", form=RegistrationForm())
 
 if __name__ == '__main__':
     app.run()
