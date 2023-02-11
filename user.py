@@ -13,3 +13,8 @@ class User:
 
 	def is_authenticated(self):
 		return True
+
+	def is_demo(self):
+		if self.email == 'mail@exemplo.com.br':
+			return True
+		return False

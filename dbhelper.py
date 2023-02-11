@@ -2,9 +2,11 @@ import os
 import pymongo
 from bson import ObjectId
 from os.path import join, dirname, realpath
+from time import time
 
 DATABASE = "waitercaller"
 IMAGES_PATH = join(dirname(realpath(__file__)), 'static')
+expire_time = 60
 
 class DBHelper:
 
@@ -34,6 +36,9 @@ class DBHelper:
 
     def update_table(self, _id, url, qrc):
         self.db.tables.update_one({"_id": _id}, {"$set": {"url": url, "qrc": qrc}})
+        if owner_id == self.get_user('mail@exemplo.com.br'):
+            self.db.tables.update_one({"_id": _id}, {"$set": {"expire_time": time() + expire_time}})
+        
 
     def get_tables(self, owner_id):
         return list(self.db.tables.find({"owner": owner_id}))
@@ -58,7 +63,14 @@ class DBHelper:
             return True
 
     def get_requests(self, owner_id):
+        if owner_id == self.get_user('mail@exemplo.com.br'):
+            self.remove_expired_records()
         return list(self.db.requests.find({"owner": owner_id}))
 
     def delete_request(self, request_id):
         self.db.requests.delete_one({"_id": ObjectId(request_id)})
+
+    def remove_expired_records(self):
+        current_time = time.time()
+        self.db.requests.delete_many({'time': {'$lt': current_time-expire_time}})
+        self.db.tables.delete_many({'expire_time': {'$lt': current_time}})

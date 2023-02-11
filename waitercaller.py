@@ -9,6 +9,7 @@ from flask import url_for
 
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from flask_mail import Mail, Message
+from time import time
 import uuid
 
 import config
@@ -182,4 +183,4 @@ def new_request(tid):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
