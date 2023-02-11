@@ -200,7 +200,7 @@ def contact():
 
         return render_template("contact.html", form=ContactForm(), 
                                 onloadmessage="Agradecemos o seu contato. Responderemos ASAP.")
-    return render_template("contact.html", form=ContactForm())
+    return render_template("contact.html", form=ContactForm(request.form))
 
 if __name__ == '__main__':
     app.run()
