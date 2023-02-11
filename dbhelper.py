@@ -72,6 +72,6 @@ class DBHelper:
         self.db.requests.delete_one({"_id": ObjectId(request_id)})
 
     def remove_expired_records(self):
-        current_time = time.time()
+        current_time = time()
         self.db.requests.delete_many({'time': {'$lt': current_time-expire_time}})
         self.db.tables.delete_many({'expire_time': {'$lt': current_time}})
