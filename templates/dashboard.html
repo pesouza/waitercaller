@@ -39,26 +39,9 @@
 
     <div class="container">
       <div class="row">
-        <div>
+        <div class="col">
           <h2>Chamados</h2>
           {% if requests %}
-            <!--table class="table table-striped">
-              <tr>
-                <th>No.</th>
-                <th>Tempo de espera</th>
-                <th>Atender</th>
-              </tr>
-              {% for request in requests %}
-                <tr>
-                  <form class="form-inline" action="/dashboard/resolve">
-                    <td>{{request.table_number}}</td>
-                    <td>{{request.wait_minutes}}</td> 
-                    <input type="text" name="request_id" value="{{request._id}}" hidden>
-                    <td><input type="submit" value="Atender" class="btn btn-primary"></td>
-                  </form>
-                </tr>
-              {% endfor %}
-            </table-->
             <div class="grid-container">
               {% for request in requests %}
                 <div class="grid-item">
