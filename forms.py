@@ -29,6 +29,6 @@ class CreateTableForm(Form):
 class ContactForm(Form):
     name = StringField(label='Nome', validators=[validators.DataRequired()])
     email = StringField(label='E-mail', validators=[
-      validators.DataRequired(), validators.Email(granular_message=True)])
+      validators.DataRequired(), validators.Email()])
     message= StringField(label='Mensagem', validators=[validators.DataRequired()])
     submit = SubmitField(label="Enviar")
