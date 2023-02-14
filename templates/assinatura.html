@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Assinatura Mensal</title>
+  </head>
+  <body>
+    <h1>Torne-se um assinante</h1>
+    <form action="/pay" method="post">
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="YOUR_PUBLISHABLE_STRIPE_KEY"
+        data-description="Assinatura Mensal"
+        data-amount="999"
+        data-locale="auto">
+      </script>
+    </form>
+  </body>
+</html>

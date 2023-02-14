@@ -4,7 +4,7 @@ import json
 
 TOKEN = "69a58187ab3f5fc0d0d32c4b9de13e35b4633023"
 ROOT_URL = "https://api-ssl.bitly.com"
-SHORTEN = "/v4/shorten?access_token={}&longUrl={}"
+SHORTEN = "/v3/shorten?access_token={}&longUrl={}"
 headers = {
     'Authorization': f'Bearer {TOKEN}',
     'Content-Type': 'application/json',
