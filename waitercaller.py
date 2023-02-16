@@ -51,6 +51,7 @@ mail = Mail(app)
 stripe_keys = {
     "secret_key": config.STRIPE_SECRET_KEY,
     "publishable_key": config.STRIPE_PUBLISHABLE_KEY,
+    "price_id": config.STRIPE_PRICE_ID,
 }
 
 stripe.api_key = stripe_keys["secret_key"]
@@ -125,7 +126,7 @@ def register():
         salt = PH.get_salt()
         hashed = PH.get_hash(form.password2.data + salt)
         token = generate_confirmation_token()
-        DB.add_user(str(form.place.data), form.email.data, salt, hashed, token, customer.id)
+        DB.add_user(str(form.place.data), form.email.data, salt, hashed, token)
 
         send_confirmation_email(form.email.data, token)
 
