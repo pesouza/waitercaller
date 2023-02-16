@@ -48,7 +48,7 @@ mail = Mail(app)
     "publishable_key": os.environ["STRIPE_PUBLISHABLE_KEY"],
 }
  """
- stripe_keys = {
+stripe_keys = {
     "secret_key": config.STRIPE_SECRET_KEY,
     "publishable_key": config.STRIPE_PUBLISHABLE_KEY,
 }
