@@ -1,7 +1,7 @@
 #!/usr/local/envs/flask/lib/python3.10
 import datetime
 import os
-import stripe
+#import stripe
 from flask import Flask
 from flask import redirect
 from flask import render_template
@@ -47,7 +47,7 @@ mail = Mail(app)
     "secret_key": os.environ["STRIPE_SECRET_KEY"],
     "publishable_key": os.environ["STRIPE_PUBLISHABLE_KEY"],
 }
- """
+ 
 stripe_keys = {
     "secret_key": config.STRIPE_SECRET_KEY,
     "publishable_key": config.STRIPE_PUBLISHABLE_KEY,
@@ -55,18 +55,19 @@ stripe_keys = {
 }
 
 stripe.api_key = stripe_keys["secret_key"]
+"""
 
 DB = DBHelper()
 PH = PasswordHelper()
 BH = BitlyHelper()
 QH = QrcodeHelper()
 
-stripe.billing_portal.Configuration.create(
+""" stripe.billing_portal.Configuration.create(
   business_profile={
     "headline": "a WaiterExpress tem parceria com a Stripe para simplificar o faturamento.",
   },
   features={"invoice_history": {"enabled": True}},
-)
+) """
 
 def generate_confirmation_token():
     return str(uuid.uuid4().hex)
@@ -118,10 +119,10 @@ def register():
             form.email.errors.append("Endereço de e-mail já registrado")
             return render_template("home.html", loginform=LoginForm(), registrationform=form)
 
-        customer = stripe.Customer.create(
+        """ customer = stripe.Customer.create(
             email=request.form['email'],
             source=request.form['stripe_token']
-        )
+        ) """
 
         salt = PH.get_salt()
         hashed = PH.get_hash(form.password2.data + salt)
