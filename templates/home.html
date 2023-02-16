@@ -39,7 +39,7 @@
             <div class="form-group">
               {{ loginform.submit(value="Entrar", class="btn btn-success")}}
             </div>
-            <div class="form-group">
+            <!--div class="form-group">
               <div class="col-sm-9">
                   {% if registrationform.stripe_token.errors %}
                       <ul class="errors">{% for error in registrationform.stripe_token.errors %}<li>{{ error }}</li>{% endfor %}</ul>
@@ -72,7 +72,7 @@
                           handler.close();
                       });
                   </script>
-              </div>
+              </div-->
           </div>
           
           </form>

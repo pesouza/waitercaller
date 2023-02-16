@@ -3,6 +3,7 @@ import pymongo
 from bson import ObjectId
 from os.path import join, dirname, realpath
 from time import time
+from datetime import date
 
 DATABASE = "waitercaller"
 IMAGES_PATH = join(dirname(realpath(__file__)), 'static')
@@ -17,11 +18,12 @@ class DBHelper:
     def get_user(self, email):
         return self.db.users.find_one({"email": email})
 
-    def add_user(self, place, email, salt, hashed, token, customer_id):
+    def add_user(self, place, email, salt, hashed, token):
         self.db.users.insert_one({"place": place,  "email": email, 
                                 "salt": salt, "hashed": hashed, 
                                 "confirmed": False, "token": token, 
-                                "customer_id": customer_id})
+                                "created_on": date.today()})
+
 
     def confirm_email(self, token):
         user = self.db.users.find_one({"token": token})
