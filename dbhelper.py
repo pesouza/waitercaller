@@ -17,10 +17,11 @@ class DBHelper:
     def get_user(self, email):
         return self.db.users.find_one({"email": email})
 
-    def add_user(self, place, email, salt, hashed, token):
+    def add_user(self, place, email, salt, hashed, token, customer_id):
         self.db.users.insert_one({"place": place,  "email": email, 
                                 "salt": salt, "hashed": hashed, 
-                                "confirmed": False, "token": token})
+                                "confirmed": False, "token": token, 
+                                "customer_id": customer_id})
 
     def confirm_email(self, token):
         user = self.db.users.find_one({"token": token})
