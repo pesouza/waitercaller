@@ -69,7 +69,7 @@ PH = PasswordHelper()
 BH = BitlyHelper()
 QH = QrcodeHelper()
 
-
+YOUR_DOMAIN = 'waiterexpress.com.br'
 
 def generate_confirmation_token():
     return str(uuid.uuid4().hex)
