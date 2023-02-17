@@ -45,7 +45,7 @@
               {% endif %}
               {{ createtableform.csrf_token}}
               {{ createtableform.tablenumber(class="form-control", placeholder="Número ou nome da mesa")}}
-              {{ createtableform.submit(value="Create", class="btn btn-primary") }}
+              {{ createtableform.submit(value="Adicionar", class="btn btn-primary") }}
             </div>
           </form>
         </div>    
@@ -70,7 +70,7 @@
           <!-- Add a hidden field with the lookup_key of your Price -->
           <input type="hidden" name="lookup_key" value="basic" />
           <input type="hidden" name="customer" value="{{user.stripe_id}}" />
-          <button id="checkout-and-portal-button" type="submit">Adquirir</button>
+          <button id="checkout-and-portal-button" type="submit" class="btn btn-primary">Adquirir</button>
         </form>
       </section>
       <script src="https://js.stripe.com/v3/"></script>

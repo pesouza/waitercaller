@@ -258,8 +258,8 @@ def create_checkout_session():
                     'quantity': 1,
                 },
             ],
-            #customer_details=request.form['customer'],
             mode='subscription',
+            customer=request.form['customer'],
             success_url=YOUR_DOMAIN +
             '/success.html?session_id={CHECKOUT_SESSION_ID}',
             cancel_url=YOUR_DOMAIN + '/cancel.html',
@@ -267,7 +267,7 @@ def create_checkout_session():
         return redirect(checkout_session.url, code=303)
     except Exception as e:
         print(e)
-        return "Server error", 500
+        return f"Server error: {e}", 500
 
 @app.route('/create-portal-session', methods=['POST'])
 def customer_portal():
