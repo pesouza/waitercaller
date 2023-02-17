@@ -246,7 +246,7 @@ def termos():
 def customer_portal():
   # Authenticate your user.
   session = stripe.billing_portal.Session.create(
-    customer='{{customer_id}}',
+    customer=form.customer_id.data',
     return_url=redirect(url_for('account')),
   )
   return redirect(session.url)
