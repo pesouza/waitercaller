@@ -56,6 +56,7 @@ stripe_keys = {
 }
 
 stripe.api_key = stripe_keys["secret_key"]
+
 stripe.billing_portal.Configuration.create(
   business_profile={
     "headline": "Cactus Practice partners with Stripe for simplified billing.",
@@ -257,7 +258,7 @@ def webhook_received():
     # If you are testing with the CLI, find the secret by running 'stripe listen'
     # If you are using an endpoint defined with the API or dashboard, look in your webhook settings
     # at https://dashboard.stripe.com/webhooks
-    webhook_secret = 'whsec_12345'
+    webhook_secret = 'we_1McY2NLTnqwraNUoneoSI8bj'
     request_data = json.loads(request.data)
 
     if webhook_secret:
