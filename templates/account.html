@@ -52,6 +52,7 @@
       </div>
       <br>
       <form method="POST" action="/create-customer-portal-session">
+        <input type="hidden" name="customer_id" value="{{user.stripe_id}}" />
         <button type="submit">Manage billing</button>
       </form>
      
