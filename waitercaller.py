@@ -116,12 +116,13 @@ def register():
 
         customer = stripe.Customer.create(
             email=request.form['email'],
+            estabelecimento=request.form['place']
         )
 
         salt = PH.get_salt()
         hashed = PH.get_hash(form.password2.data + salt)
         token = generate_confirmation_token()
-        DB.add_user(str(form.place.data), form.email.data, salt, hashed, token)
+        DB.add_user(str(form.place.data), form.email.data, salt, hashed, token, customer.id)
 
         send_confirmation_email(form.email.data, token)
 

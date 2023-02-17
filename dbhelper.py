@@ -18,11 +18,12 @@ class DBHelper:
     def get_user(self, email):
         return self.db.users.find_one({"email": email})
 
-    def add_user(self, place, email, salt, hashed, token):
+    def add_user(self, place, email, salt, hashed, token, customer):
         self.db.users.insert_one({"place": place,  "email": email, 
                                 "salt": salt, "hashed": hashed, 
                                 "confirmed": False, "token": token, 
-                                "created_on": date.today()})
+                                "stripe_id": customer,
+                                "created_on": datetime.today()})
 
 
     def confirm_email(self, token):
