@@ -263,7 +263,7 @@ def create_checkout_session():
             success_url=YOUR_DOMAIN +
             '/success.html?session_id={CHECKOUT_SESSION_ID}',
             cancel_url=YOUR_DOMAIN + '/cancel.html',
-            customer_creation: "if_required"
+            customer_creation="if_required"
         )
         return redirect(checkout_session.url, code=303)
     except Exception as e:
