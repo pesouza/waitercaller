@@ -259,7 +259,7 @@ def create_checkout_session():
                 },
             ],
             mode='subscription',
-            #customer=request.form['customer'],
+            customer=request.form['customer'],
             success_url=YOUR_DOMAIN +
             '/success.html?session_id={CHECKOUT_SESSION_ID}',
             cancel_url=YOUR_DOMAIN + '/cancel.html',
