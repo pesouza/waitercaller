@@ -56,6 +56,12 @@ stripe_keys = {
 }
 
 stripe.api_key = stripe_keys["secret_key"]
+stripe.billing_portal.Configuration.create(
+  business_profile={
+    "headline": "Cactus Practice partners with Stripe for simplified billing.",
+  },
+  features={"invoice_history": {"enabled": True}},
+)
 
 DB = DBHelper()
 PH = PasswordHelper()
@@ -236,47 +242,14 @@ def privacidade():
 def termos():
     return render_template("termos.html")
 
-@app.route('/create-checkout-session', methods=['POST'])
-def create_checkout_session():
-    try:
-        prices = stripe.Price.list(
-            lookup_keys=[request.form['lookup_key']],
-            expand=['data.product']
-        )
-
-        checkout_session = stripe.checkout.Session.create(
-            line_items=[
-                {
-                    'price': prices.data[0].id,
-                    'quantity': 1,
-                },
-            ],
-            mode='subscription',
-            success_url=YOUR_DOMAIN +
-            '/success.html?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url=YOUR_DOMAIN + '/cancel.html',
-        )
-        return redirect(checkout_session.url, code=303)
-    except Exception as e:
-        print(e)
-        return "Server error", 500
-
-@app.route('/create-portal-session', methods=['POST'])
+@app.route('/create-customer-portal-session', methods=['POST'])
 def customer_portal():
-    # For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
-    # Typically this is stored alongside the authenticated user in your database.
-    checkout_session_id = request.form.get('session_id')
-    checkout_session = stripe.checkout.Session.retrieve(checkout_session_id)
-
-    # This is the URL to which the customer will be redirected after they are
-    # done managing their billing with the portal.
-    return_url = YOUR_DOMAIN
-
-    portalSession = stripe.billing_portal.Session.create(
-        customer=checkout_session.customer,
-        return_url=return_url,
-    )
-    return redirect(portalSession.url, code=303)
+  # Authenticate your user.
+  session = stripe.billing_portal.Session.create(
+    customer='{{CUSTOMER_ID}}',
+    return_url=redirect(url_for('account')),
+  )
+  return redirect(session.url)
 
 @app.route('/webhook', methods=['POST'])
 def webhook_received():
