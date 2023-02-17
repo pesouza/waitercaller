@@ -116,7 +116,7 @@ def register():
 
         customer = stripe.Customer.create(
             email=request.form['email'],
-            metadata-{'estabelecimento': request.form['place']}
+            metadata={'estabelecimento': request.form['place']}
         )
 
         salt = PH.get_salt()
