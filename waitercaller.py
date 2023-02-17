@@ -114,10 +114,9 @@ def register():
             form.email.errors.append("Endereço de e-mail já registrado")
             return render_template("home.html", loginform=LoginForm(), registrationform=form)
 
-        """ customer = stripe.Customer.create(
+        customer = stripe.Customer.create(
             email=request.form['email'],
-            source=request.form['stripe_token']
-        ) """
+        )
 
         salt = PH.get_salt()
         hashed = PH.get_hash(form.password2.data + salt)
