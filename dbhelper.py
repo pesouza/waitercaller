@@ -3,7 +3,7 @@ import pymongo
 from bson import ObjectId
 from os.path import join, dirname, realpath
 from time import time
-from datetime import date
+from datetime import datetime
 
 DATABASE = "waitercaller"
 IMAGES_PATH = join(dirname(realpath(__file__)), 'static')
