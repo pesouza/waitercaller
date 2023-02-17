@@ -68,7 +68,7 @@
         </div>
         <form action="/create-checkout-session" method="POST">
           <!-- Add a hidden field with the lookup_key of your Price -->
-          <input type="hidden" name="lookup_key" value="txt" />
+          <input type="hidden" name="lookup_key" value="tst" />
           <input type="hidden" name="customer" value="{{user.stripe_id}}" />
           <button id="checkout-and-portal-button" type="submit" class="btn btn-primary">Adquirir</button>
         </form>
