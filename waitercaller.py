@@ -1,7 +1,7 @@
 #!/usr/local/envs/flask/lib/python3.10
 import datetime
 import os
-#import stripe
+import stripe
 from flask import Flask
 from flask import redirect
 from flask import render_template
@@ -47,6 +47,7 @@ mail = Mail(app)
     "secret_key": os.environ["STRIPE_SECRET_KEY"],
     "publishable_key": os.environ["STRIPE_PUBLISHABLE_KEY"],
 }
+"""
  
 stripe_keys = {
     "secret_key": config.STRIPE_SECRET_KEY,
@@ -55,19 +56,13 @@ stripe_keys = {
 }
 
 stripe.api_key = stripe_keys["secret_key"]
-"""
 
 DB = DBHelper()
 PH = PasswordHelper()
 BH = BitlyHelper()
 QH = QrcodeHelper()
 
-""" stripe.billing_portal.Configuration.create(
-  business_profile={
-    "headline": "a WaiterExpress tem parceria com a Stripe para simplificar o faturamento.",
-  },
-  features={"invoice_history": {"enabled": True}},
-) """
+
 
 def generate_confirmation_token():
     return str(uuid.uuid4().hex)
@@ -240,6 +235,64 @@ def privacidade():
 @app.route("/termos")
 def termos():
     return render_template("termos.html")
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    event = None
+    payload = request.data
+    sig_header = request.headers['STRIPE_SIGNATURE']
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        raise e
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        raise e
+
+    # Handle the event
+    
+    # Handle the event
+    if event['type'] == 'checkout.session.async_payment_failed':
+      session = event['data']['object']
+    elif event['type'] == 'checkout.session.async_payment_succeeded':
+      session = event['data']['object']
+    elif event['type'] == 'checkout.session.completed':
+      session = event['data']['object']
+    elif event['type'] == 'checkout.session.expired':
+      session = event['data']['object']
+    elif event['type'] == 'customer.created':
+      customer = event['data']['object']
+    elif event['type'] == 'customer.deleted':
+      customer = event['data']['object']
+    elif event['type'] == 'customer.updated':
+      customer = event['data']['object']
+    elif event['type'] == 'customer.subscription.created':
+      subscription = event['data']['object']
+    elif event['type'] == 'customer.subscription.deleted':
+      subscription = event['data']['object']
+    elif event['type'] == 'customer.subscription.paused':
+      subscription = event['data']['object']
+    elif event['type'] == 'customer.subscription.resumed':
+      subscription = event['data']['object']
+    elif event['type'] == 'customer.subscription.trial_will_end':
+      subscription = event['data']['object']
+    elif event['type'] == 'customer.subscription.updated':
+      subscription = event['data']['object']
+    elif event['type'] == 'person.created':
+      person = event['data']['object']
+    elif event['type'] == 'person.deleted':
+      person = event['data']['object']
+    elif event['type'] == 'person.updated':
+      person = event['data']['object']
+    # ... handle other event types
+    else:
+      print('Unhandled event type {}'.format(event['type']))
+
+    return jsonify(success=True)
 
 
 if __name__ == '__main__':
