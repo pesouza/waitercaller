@@ -258,7 +258,7 @@ def create_checkout_session():
                     'quantity': 1,
                 },
             ],
-            customer_details.email=request.form['customer'],
+            customer_details=[{'email': request.form['customer']}],
             mode='subscription',
             success_url=YOUR_DOMAIN +
             '/success.html?session_id={CHECKOUT_SESSION_ID}',
