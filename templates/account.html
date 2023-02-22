@@ -4,7 +4,8 @@
     <div class="jumbotron">
       <div class="container">
         <h1>{{user.place}}</h1>
-        <p>Gerencie suas mesas e gere as URLs</p>
+        <h2>Gerencie aqui as suas mesas.</h2> 
+        <p>Gere um QRcode para cada mesa, imprima-os e coloque-os sobre as mesas correspondentes.</p>
       </div>
     </div>
 
@@ -55,7 +56,7 @@
       </div>
       <br>
       
-      <script src="https://js.stripe.com/v3/"></script>
+      <!--script src="https://js.stripe.com/v3/"></script>
       <script async src="https://js.stripe.com/v3/pricing-table.js">
   </script>
   <stripe-pricing-table
@@ -64,7 +65,7 @@
     client-reference-id="{{user.stripe_id}}"
     custumer-email="{{user.email}}"
   >
-  </stripe-pricing-table>
+  </stripe-pricing-table-->
    
     </div>
 {% endblock %}
