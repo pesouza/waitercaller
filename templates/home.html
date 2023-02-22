@@ -120,6 +120,15 @@
           </form>
         </div>
       </div>
+      <div class="row">
+        {% for testemunho in testemunhos %}
+        <div class="testemunho">
+          <h3>{{ testemunho.nome }}</h3>
+          <p>{{ testemunho.depoimento }}</p>
+          <p class="data">{{ testemunho.created_on.strftime('%d/%m/%Y') }}</p>
+        </div>
+      {% endfor %}        
+      </div>
     </div>
 {% endblock %}
 
