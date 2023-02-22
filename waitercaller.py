@@ -150,7 +150,9 @@ def logout():
 
 @app.route("/")
 def home():
-    return render_template("home.html", loginform=LoginForm(), registrationform=RegistrationForm())
+    testemunhos = DB.get_testem()
+    return render_template("home.html", loginform=LoginForm(), registrationform=RegistrationForm(), 
+                            testemunhos=testemunhos)
 
 
 @app.route("/dashboard")
@@ -327,6 +329,16 @@ def webhook_received():
         print('Subscription canceled: %s', event.id)
 
     return jsonify({'status': 'success'})
+
+@app.route('/adicionar_testemunho', methods=['GET', 'POST'])
+def adicionar_testemunho():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        depoimento = request.form['depoimento']
+        DB.add_testem(nome=nome, depoimento=depoimento)
+        flash('Testemunho adicionado com sucesso!')
+        #return redirect(url_for('testemunhos'))
+    #return render_template('adicionar_testemunho.html')
 
 if __name__ == '__main__':
     app.run()
