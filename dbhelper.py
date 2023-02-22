@@ -37,7 +37,7 @@ class DBHelper:
         self.db.testem.insert_one({"owner": owner, "depoimento": depoimento, "created_on": datetime.today()})
 
     def get_testem(self):
-        return list(self.db.testem.objects.order_by('-created_on'))
+        return list(self.db.testem.find().sort([('created_on', pymongo.DESCENDING)]))
 
     def add_table(self, number, owner):
         new_id = self.db.tables.insert_one({"number": number, "owner": owner}).inserted_id
