@@ -34,7 +34,9 @@ class DBHelper:
         return False
 
     def add_testem(self, owner, depoimento):
-        self.db.testem.insert_one({"owner": owner, "depoimento": depoimento, "created_on": datetime.today()})
+        self.db.testem.insert_one({"owner": owner, "estabelecimento": estabelecimento,
+                                    "depoimento": depoimento,
+                                    "created_on": datetime.today()})
 
     def get_testem(self):
         return list(self.db.testem.find().sort([('created_on', pymongo.DESCENDING)]))

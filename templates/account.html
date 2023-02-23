@@ -1,70 +1,82 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="jumbotron">
-      <div class="container">
-        <h1>{{user.place}}</h1>
-        <h2>Gerencie aqui as suas mesas.</h2> 
-        <p>Gere um QRcode para cada mesa, imprima-os e coloque-os sobre as mesas correspondentes.</p>
+<div class="jumbotron">
+  <div class="container">
+    <h1>{{user.place}}</h1>
+    <h2>Gerencie aqui as suas mesas.</h2>
+    <p>Gere um QRcode para cada mesa, imprima-os e coloque-os sobre as mesas correspondentes.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Mesas</h2>
+      <table class="table table-striped">
+        <tr>
+          <th>No.</th>
+          <th>URL</th>
+          <th>QRCode</th>
+          <th>Apagar</th>
+        </tr>
+        {% for table in tables %}
+        <form class="form-inline" action="/account/deletetable">
+          <tr>
+            <td>{{table.number}}</td>
+            <td>{{table.url}}</td>
+            <td><a href="{{url_for('static', filename=table.qrc)}}" target="_blank">
+                <img src="{{url_for('static', filename=table.qrc)}}" width="50"></a></td>
+            <td> <input type="submit" value="Delete" class="form-control"></td>
+            <input type="text" name="tableid" value="{{table._id}}" hidden>
+          </tr>
+        </form>
+        {% endfor %}
+      </table>
+
+      <h2>Adicione uma nova mesa</h2>
+      <form class="form-inline" action="/account/createtable" method="POST">
+        <div class="form-group">
+          {% if createtableform.tablenumber.errors %}
+          <ul class="errors">
+            {% for error in createtableform.tablenumber.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {{ createtableform.csrf_token}}
+          {{ createtableform.tablenumber(class="form-control", placeholder="Número ou nome da mesa")}}
+          {{ createtableform.submit(value="Adicionar", class="btn btn-primary") }}
+        </div>
+      </form>
+    </div>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="grid-container">
+      <div class="grid-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="feather feather-dollar-sign">
+          <line x1="12" y1="1" x2="12" y2="23"></line>
+          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+        </svg>
+        <br>
+        <img src="{{ url_for('static', filename = 'site/qr_aEU2aNgWOdDQaic6oo.png') }}"
+          class="img-fluid img-thumbnail rounded" alt="QRCode">
+        <br>
+        <a class="one" href="https://buy.stripe.com/aEU2aNgWOdDQaic6oo?prefilled_email={{user.email}}"
+          target="_blank">Pague a mensalidade que achar justa!</a>
+      </div>
+      <div class="grid-item">
+        <h4>Deixe seu</h4>
+        <a class="one" href="{{ url_for('templates', filename = 'adicionar_depoimento.html')}}" target="_blank">Depoimento</a>
+
       </div>
     </div>
+  </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h2>Mesas</h2>
-            <table class="table table-striped">
-              <tr>
-                <th>No.</th>
-                <th>URL</th>
-                <th>QRCode</th>
-                <th>Apagar</th>
-              </tr> 
-              {% for table in tables %}
-                <form class="form-inline" action="/account/deletetable">
-                  <tr>
-                    <td>{{table.number}}</td> 
-                    <td>{{table.url}}</td>
-                    <td><a href="{{url_for('static', filename=table.qrc)}}" target="_blank">
-                      <img src="{{url_for('static', filename=table.qrc)}}" width="50"></a></td> 
-                    <td> <input type="submit" value="Delete" class="form-control"></td>
-                    <input type="text" name="tableid" value="{{table._id}}" hidden> 
-                  </tr>
-                </form>
-              {% endfor %}
-            </table>
-
-          <h2>Adicione uma nova mesa</h2>
-          <form class="form-inline" action="/account/createtable" method="POST">
-            <div class="form-group">
-              {% if createtableform.tablenumber.errors %} 
-                <ul class="errors"> 
-                  {% for error in createtableform.tablenumber.errors %} 
-                    <li>{{error}}</li> 
-                  {% endfor %} 
-                </ul> 
-              {% endif %}
-              {{ createtableform.csrf_token}}
-              {{ createtableform.tablenumber(class="form-control", placeholder="Número ou nome da mesa")}}
-              {{ createtableform.submit(value="Adicionar", class="btn btn-primary") }}
-            </div>
-          </form>
-        </div>    
-      </div>
-      <br><br>
-      <div class="row">
-        <div class="grid-container">
-          <div class="grid-item">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-            <br>
-            <img src="{{ url_for('static', filename = 'site/qr_aEU2aNgWOdDQaic6oo.png') }}" class="img-fluid img-thumbnail rounded" alt="QRCode">
-            <br>
-            <a class="one" href="https://buy.stripe.com/aEU2aNgWOdDQaic6oo?prefilled_email={{user.email}}"  target="_blank">Pague a mensalidade que achar justa!</a>
-          </div>
-        </div>
-      </div>
-      
-      <!--script src="https://js.stripe.com/v3/"></script>
+  <!--script src="https://js.stripe.com/v3/"></script>
       <script async src="https://js.stripe.com/v3/pricing-table.js">
   </script>
   <stripe-pricing-table
@@ -74,6 +86,6 @@
     custumer-email="{{user.email}}"
   >
   </stripe-pricing-table-->
-   
-    </div>
+
+</div>
 {% endblock %}

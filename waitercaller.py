@@ -334,11 +334,12 @@ def webhook_received():
 def adicionar_testemunho():
     if request.method == 'POST':
         nome = request.form['nome']
+        estabelecimento = request.form['estabelecimento']
         depoimento = request.form['depoimento']
-        DB.add_testem(nome=nome, depoimento=depoimento)
+        DB.add_testem(nome=nome, estabelecimento=estabelecimento, depoimento=depoimento)
         flash('Testemunho adicionado com sucesso!')
-        #return redirect(url_for('testemunhos'))
-    #return render_template('adicionar_testemunho.html')
+        return redirect(url_for('home'))
+    return render_template('adicionar_testemunho.html')
 
 if __name__ == '__main__':
     app.run()
