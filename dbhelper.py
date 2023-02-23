@@ -33,8 +33,8 @@ class DBHelper:
             return True
         return False
 
-    def add_testem(self, owner, depoimento):
-        self.db.testem.insert_one({"owner": owner, "estabelecimento": estabelecimento,
+    def add_testem(self, nome, estabelecimento, depoimento):
+        self.db.testem.insert_one({"owner": nome, "estabelecimento": estabelecimento,
                                     "depoimento": depoimento,
                                     "created_on": datetime.today()})
 
