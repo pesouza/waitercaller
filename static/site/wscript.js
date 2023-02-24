@@ -159,13 +159,13 @@ function setWaiterLose() {
 
 function handleRun(delta, speedScale) {
   if (isJumping) {
-    waiter.src = `../static/site/waiter-jump.png`;
+    waiter.src = "../static/site/waiter-jump.png";
     return;
   }
 
   if (currentFrameTime >= FRAME_TIME) {
     waiterFrame = (waiterFrame + 1) % WAITER_FRAME_COUNT;
-    waiter.src = `../static/site/waiter-run-${waiterFrame}.png`; /* switch between images to simulate movement */
+    waiter.src = "../static/site/waiter-run-${waiterFrame}.png"; /* switch between images to simulate movement */
     currentFrameTime -= FRAME_TIME;
   }
   currentFrameTime += delta * speedScale;
