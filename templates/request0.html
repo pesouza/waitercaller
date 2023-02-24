@@ -1,23 +1,20 @@
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Request</title>
+    <title>Request</title>
     <meta name="title" content="Waiter Express - Chame o Garçom fácil e sem complicações para seus clientes">
     <meta name="description" content="Ofereça aos seus clientes a conveniência de solicitar a presença do garçom sem a necessidade de baixar aplicativos com Chame o Garçom. Simples, eficiente e sem complicações.">
     <meta name="Key-words" content="garçom, solicitação, telefone, QRCode, estabelecimento, jantar, almoço, café da manhã, conveniência, clientes, restaurante.">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://waiterexpress.com.br/">
+    <meta property="og:url" content="http://waiterexpress.com.br/">
     <meta property="og:title" content="Waiter Express - Chame o Garçom!">
     <meta property="og:description" content="Ofereça aos seus clientes a conveniência de solicitar a presença do garçom sem a necessidade de baixar aplicativos com Chame o Garçom. Simples, eficiente e sem complicações.">
     <meta property="og:image" content="{{ url_for('static', filename = 'images/1.png') }}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://waiterexpress.com.br/">
+    <meta property="twitter:url" content="http://waiterexpress.com.br/">
     <meta property="twitter:title" content="Waiter Express - Chame o Garçom!">
     <meta property="twitter:description" content="Ofereça aos seus clientes a conveniência de solicitar a presença do garçom sem a necessidade de baixar aplicativos com Chame o Garçom. Simples, eficiente e sem complicações.">
     <meta property="twitter:image" content="{{ url_for('static', filename = 'images/1.png') }}">
@@ -44,10 +41,6 @@
         //width: 50%;
       }
     </style>
-          <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
-          <link rel="preconnect" href="https://fonts.googleapis.com">
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-          <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4751689877189904"
     crossorigin="anonymous"></script>
   </head>
@@ -55,19 +48,10 @@
     <div class="container">
         <h1>{{ message }}</h1>
         <br>
-        <div id="game" class="game">
-          <div id="score" class="score">0</div>
-          <div id="start-message" class="start-message">Press any key to start</div>
-          <img src="{{ url_for('static', filename = 'site/ground.png') }}" class="ground">
-          <img src="{{ url_for('static', filename = 'site/ground.png') }}" class="ground">
-          <img src="{{ url_for('static', filename = 'site/waiter-stationary.png') }}" id="waiter" class="waiter">
-          <div id="gameover-message" class="gameover-message hide">
-             <p>Game over</p>
-             <span>Press any key to restart</span>
-          </div>
-       </div>
-       <script src="{{ url_for('static', filename = 'js/wscript.js') }}"></script>
+        <img src="{{ url_for('static', filename = image) }}" alt="Image">
     </div>
-
+    <audio autoplay>
+        <source src="{{ url_for('static', filename = sound) }}" type="audio/mpeg" >
+    </audio>
 </body>
 </html>
