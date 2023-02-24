@@ -134,6 +134,7 @@ let currentFrameTime;
 let yVelocity;
 
 function setupWaiter() {
+  setWaiter();
   isJumping = false;
   waiterFrame = 0;
   currentFrameTime = 0;
@@ -153,6 +154,10 @@ function getWaiterRect() {
   return waiter.getBoundingClientRect(); /* get the waitersaur hitbox */
 }
 
+function setWaiter() {
+  waiter.src = "../static/site/waiter-stationary.png";
+}
+
 function setWaiterLose() {
   waiter.src = "../static/site/waiter-lose.png";
 }
@@ -167,8 +172,6 @@ function handleRun(delta, speedScale) {
     waiterFrame = (waiterFrame + 1) % WAITER_FRAME_COUNT;
     waiter.src = `../static/site/waiter-run-${waiterFrame}.png`; /* switch between images to simulate movement */
     currentFrameTime -= FRAME_TIME;
-    console.log(currentFrameTime);
-    console.log(waiter.src);
   }
   currentFrameTime += delta * speedScale;
 }
@@ -195,7 +198,7 @@ function onJump(e) {
 
 /* ADD TABLE */
 
-const TABLE_SPEED = 0.045;
+const TABLE_SPEED = 0.05;
 const TABLE_INTERVAL_MIN = 1000;
 const TABLE_INTERVAL_MAX = 2000;
 
