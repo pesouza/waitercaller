@@ -341,9 +341,6 @@ def adicionar_testemunho():
         return redirect(url_for('home'))
     return render_template('adicionar_testemunho.html')
 
-@app.route("/wscript_js")
-def wscript_js():
-    render_template("/site/wscript.js")
 
 if __name__ == '__main__':
     app.run()
