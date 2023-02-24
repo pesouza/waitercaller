@@ -154,18 +154,18 @@ function getWaiterRect() {
 }
 
 function setWaiterLose() {
-  waiter.src = "{{ URL_FOR('STATIC', FILENAME = 'site/waiter-lose.') }}";
+  waiter.src = "{{ url_for('static', filename = 'site/waiter-lose.') }}";
 }
 
 function handleRun(delta, speedScale) {
   if (isJumping) {
-    waiter.src = `{{ URL_FOR('STATIC', FILENAME = 'site/waiter-jump.png') }}`;
+    waiter.src = `{{ url_for('static', filename = 'site/waiter-jump.png') }}`;
     return;
   }
 
   if (currentFrameTime >= FRAME_TIME) {
     waiterFrame = (waiterFrame + 1) % WAITER_FRAME_COUNT;
-    waiter.src = `{{ URL_FOR('STATIC', FILENAME = 'site/waiter-run-${waiterFrame}.png) }}`; /* switch between images to simulate movement */
+    waiter.src = `{{ url_for('static', filename = 'site/waiter-run-${waiterFrame}.png) }}`; /* switch between images to simulate movement */
     currentFrameTime -= FRAME_TIME;
   }
   currentFrameTime += delta * speedScale;
