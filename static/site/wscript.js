@@ -154,18 +154,18 @@ function getWaiterRect() {
 }
 
 function setWaiterLose() {
-  waiter.src = "../site/waiter-lose.png";
+  waiter.src = "/site/waiter-lose.png";
 }
 
 function handleRun(delta, speedScale) {
   if (isJumping) {
-    waiter.src = `../site/waiter-jump.png`;
+    waiter.src = `/site/waiter-jump.png`;
     return;
   }
 
   if (currentFrameTime >= FRAME_TIME) {
     waiterFrame = (waiterFrame + 1) % WAITER_FRAME_COUNT;
-    waiter.src = `../site/waiter-run-${waiterFrame}.png`; /* switch between images to simulate movement */
+    waiter.src = `/site/waiter-run-${waiterFrame}.png`; /* switch between images to simulate movement */
     currentFrameTime -= FRAME_TIME;
   }
   currentFrameTime += delta * speedScale;
@@ -230,7 +230,7 @@ function getTableRects() {
 
 function createTable() {
   const table = document.createElement("img");
-  table.src = "../site/table.png";
+  table.src = "/site/table.png";
   table.classList.add("table");
   setCustomProperty(table, "--left", 100);
   game.append(table); 
