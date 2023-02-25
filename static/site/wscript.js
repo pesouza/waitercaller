@@ -128,7 +128,7 @@ const waiter = document.querySelector("#waiter");
 const JUMP_SPEED = 0.45;
 const GRAVITY = 0.0015;
 const WAITER_FRAME_COUNT = 6;
-const FRAME_TIME = 470;
+const FRAME_TIME = 410;
 
 let isJumping;
 let waiterFrame;
