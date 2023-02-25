@@ -139,7 +139,7 @@ function setupWaiter() {
   setWaiter();
   isJumping = false;
   waiterFrame = 0;
-  currentFrameTime = 500;
+  currentFrameTime = 50;
   yVelocity = 0;
 
   setCustomProperty(waiter, "--bottom", 0);
