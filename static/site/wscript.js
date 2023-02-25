@@ -142,7 +142,9 @@ function setupWaiter() {
 
   setCustomProperty(waiter, "--bottom", 0);
   document.removeEventListener("keydown", onJump); /* reset the waitersaur if the player dies while jumping */
+  document.removeEventListener("touchstart", onJumpTouch);
   document.addEventListener("keydown", onJump);
+  document.addEventListener("touchstart", onJumpTouch);
 }
 
 function updateWaiter(delta, speedScale) {
@@ -191,6 +193,13 @@ function handleJump(delta) {
 
 function onJump(e) {
   if (e.code !== "Space" || isJumping) return;
+
+  yVelocity = JUMP_SPEED;
+  isJumping = true;
+}
+
+function onJumpTouch() {
+  if (isJumping) return;
 
   yVelocity = JUMP_SPEED;
   isJumping = true;
