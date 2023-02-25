@@ -211,8 +211,8 @@ function onJumpTouch(e) {
 /* ADD TABLE */
 
 const TABLE_SPEED = 0.05;
-const TABLE_INTERVAL_MIN = 1000;
-const TABLE_INTERVAL_MAX = 2000;
+const TABLE_INTERVAL_MIN = 2000;
+const TABLE_INTERVAL_MAX = 3000;
 
 let nextTableTime;
 
