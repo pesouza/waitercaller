@@ -6,6 +6,7 @@ const startMessage = document.querySelector("#start-message");
 const gameoverMessage = document.querySelector("#gameover-message");
 
 document.addEventListener("keydown", startGame, { once: true });
+document.addEventListener("touchstart", startGame, { once: true });
 
 /* general variables */
 let lastTime;
@@ -75,6 +76,7 @@ function handleGameOver() {
   setWaiterLose();
   setTimeout(() => {
     document.addEventListener("keydown", startGame, { once: true }); /* prevents accidental click */
+    document.addEventListener("touchstart", startGame, { once: true });
     gameoverMessage.classList.remove("hide");
   }, 100);
 }
@@ -198,7 +200,7 @@ function onJump(e) {
   isJumping = true;
 }
 
-function onJumpTouch() {
+function onJumpTouch(e) {
   if (isJumping) return;
 
   yVelocity = JUMP_SPEED;
