@@ -128,7 +128,7 @@ const waiter = document.querySelector("#waiter");
 const JUMP_SPEED = 0.45;
 const GRAVITY = 0.0015;
 const WAITER_FRAME_COUNT = 6;
-const FRAME_TIME = 50;
+const FRAME_TIME = 450;
 
 let isJumping;
 let waiterFrame;
@@ -178,6 +178,7 @@ function handleRun(delta, speedScale) {
     currentFrameTime -= FRAME_TIME;
   }
   currentFrameTime += delta * speedScale;
+  console.log(currentFrameTime)
 }
 
 function handleJump(delta) {
