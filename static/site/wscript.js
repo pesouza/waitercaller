@@ -39,6 +39,7 @@ function startGame() {
   lastTime = null;
   speedScale = 1;
   score = 0;
+  preload();
   setupGround();
   setupWaiter();
   setupTable();
