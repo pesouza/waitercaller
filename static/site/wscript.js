@@ -139,7 +139,8 @@ let waiters = []
 
 function preload() {
   for (let i = 0; i < WAITER_FRAME_COUNT; i++) {
-    waiters[i] = loadImage("../static/site/waiter-run-" + i + ".png");
+    waiters[i] = new Image();
+    waiters[i].src = "../static/site/waiter-run-" + i + ".png";
   }
 }
 
