@@ -184,7 +184,7 @@ function handleRun(delta, speedScale) {
   if (currentFrameTime >= FRAME_TIME) {
     waiterFrame = (waiterFrame + 1) % WAITER_FRAME_COUNT;
     //waiter.src = `../static/site/waiter-run-${waiterFrame}.png`; /* switch between images to simulate movement */
-    waiter.src = waiters[waiterFrame]; /* switch between images to simulate movement */
+    waiter.src = waiters[waiterFrame].src; /* switch between images to simulate movement */
     currentFrameTime -= FRAME_TIME;
   }
   currentFrameTime += delta * speedScale;
