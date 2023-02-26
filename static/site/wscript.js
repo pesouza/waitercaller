@@ -135,7 +135,7 @@ let isJumping;
 let waiterFrame;
 let currentFrameTime;
 let yVelocity;
-let waiters = []
+let waiters = [];
 
 function preload() {
   for (let i = 0; i < WAITER_FRAME_COUNT; i++) {
