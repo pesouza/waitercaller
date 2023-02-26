@@ -128,12 +128,19 @@ const waiter = document.querySelector("#waiter");
 const JUMP_SPEED = 0.45;
 const GRAVITY = 0.0015;
 const WAITER_FRAME_COUNT = 6;
-const FRAME_TIME = 500;
+const FRAME_TIME = 100;
 
 let isJumping;
 let waiterFrame;
 let currentFrameTime;
 let yVelocity;
+let waiters = []
+
+function preload() {
+  for (let i = 0; i < WAITER_FRAME_COUNT; i++) {
+    waiters[i] = loadImage("../static/site/waiter-run-" + i + ".png");
+  }
+}
 
 function setupWaiter() {
   setWaiter();
@@ -174,7 +181,8 @@ function handleRun(delta, speedScale) {
 
   if (currentFrameTime >= FRAME_TIME) {
     waiterFrame = (waiterFrame + 1) % WAITER_FRAME_COUNT;
-    waiter.src = `../static/site/waiter-run-${waiterFrame}.png`; /* switch between images to simulate movement */
+    //waiter.src = `../static/site/waiter-run-${waiterFrame}.png`; /* switch between images to simulate movement */
+    waiter.src = waiters[waiterFrame]; /* switch between images to simulate movement */
     currentFrameTime -= FRAME_TIME;
   }
   currentFrameTime += delta * speedScale;
