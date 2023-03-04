@@ -93,6 +93,30 @@ def send_contact_email(name, email, msg):
     )
     mail.send(msg)
 
+def send_welcome_email(email, place):
+    msg = Message(
+        f"""
+        Olá {place},
+
+É com grande satisfação que recebemos você como novo usuário do Waiter Express! Sabemos o quanto é importante para o seu negócio ter um atendimento ágil e eficiente, por isso, estamos aqui para ajudar.
+
+Com o Waiter Express, seus clientes poderão solicitar a presença do garçom de forma rápida e prática, usando apenas o celular, sem a necessidade de baixar nenhum aplicativo. Além disso, você poderá acompanhar em tempo real as solicitações e agilizar o atendimento de forma ainda mais eficiente.
+
+Estamos comprometidos em oferecer um serviço de qualidade e estamos à disposição para esclarecer quaisquer dúvidas que possam surgir. Conte conosco para aprimorar o atendimento em seu estabelecimento e proporcionar uma experiência ainda mais satisfatória aos seus clientes.
+
+Mais uma vez, seja muito bem-vindo ao Waiter Express!
+
+Atenciosamente,
+Equipe Waiter Express.
+        """,
+        subject = 'Bem-vindo ao Waiter Express!'
+        sender = ('Waiter Express', [config.email]),
+        cc = [config.email]
+        recipients = email,        
+        body = msg
+    )
+    mail.send(msg)
+
 @login_manager.user_loader
 def load_user(user_id):
     user_password = DB.get_user(user_id)
@@ -138,9 +162,13 @@ def register():
 
 @app.route("/confirm/<token>")
 def confirm_email(token):
-    if DB.confirm_email(token):
-        return "Seu email foi confirmado!"
+    email, place = DB.confirm_email(token)
+    if email:
+        send_welcome_email(email, place)
+        return render_template("home.html", loginform=LoginForm(), registrationform=RegistrationForm(), onloadmessage="Seu email foi confirmado!")
+        #return "Seu email foi confirmado!"
     else:
+        #return render_template("home.html", loginform=LoginForm(), registrationform=RegistrationForm(), onloadmessage="Token inválido!")
         return "Token inválido!"
 
 @app.route("/logout")
