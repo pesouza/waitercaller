@@ -111,7 +111,7 @@ Equipe Waiter Express.
         """,
         subject = 'Bem-vindo ao Waiter Express!',
         sender = ('Waiter Express', [config.email]),
-        cc = [config.email]
+        cc = [config.email],
         recipients = email,        
         body = msg
     )
