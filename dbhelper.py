@@ -30,7 +30,7 @@ class DBHelper:
         user = self.db.users.find_one({"token": token})
         if user['_id']:
             self.db.users.update_one({"_id": user['_id']}, {"$set": {"token": None, "confirmed": True}})
-            return True
+            return (user['email'], user['place'])
         return False
 
     def add_testem(self, nome, estabelecimento, depoimento):
