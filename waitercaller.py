@@ -95,7 +95,11 @@ def send_contact_email(name, email, msg):
 
 def send_welcome_email(email, place):
     msg = Message(
-        f"""
+        subject = 'Bem-vindo ao Waiter Express!',
+        sender = ('Waiter Express', [config.email]),
+        cc = [config.email],
+        recipients = email,        
+        body = f"""
         Olá {place},
 
 É com grande satisfação que recebemos você como novo usuário do Waiter Express! Sabemos o quanto é importante para o seu negócio ter um atendimento ágil e eficiente, por isso, estamos aqui para ajudar.
@@ -108,12 +112,7 @@ Mais uma vez, seja muito bem-vindo ao Waiter Express!
 
 Atenciosamente,
 Equipe Waiter Express.
-        """,
-        subject = 'Bem-vindo ao Waiter Express!',
-        sender = ('Waiter Express', [config.email]),
-        cc = [config.email],
-        recipients = email,        
-        body = msg
+        """
     )
     mail.send(msg)
 
