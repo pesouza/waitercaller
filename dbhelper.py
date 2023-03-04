@@ -1,4 +1,5 @@
 import os
+import bson
 import pymongo
 from bson import ObjectId
 from os.path import join, dirname, realpath
@@ -28,7 +29,7 @@ class DBHelper:
 
     def confirm_email(self, token):
         user = self.db.users.find_one({"token": token})
-        if user['_id']:
+        if user is not None:
             self.db.users.update_one({"_id": user['_id']}, {"$set": {"token": None, "confirmed": True}})
             return (user['email'], user['place'])
         return False
