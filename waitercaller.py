@@ -98,7 +98,7 @@ def send_welcome_email(email, place):
         subject = 'Bem-vindo ao Waiter Express!',
         sender = ('Waiter Express', [config.email]),
         cc = [config.email],
-        recipients = email,        
+        recipients = [email],        
         body = f"""
         Olá {place},
 
