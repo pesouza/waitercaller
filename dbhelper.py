@@ -31,7 +31,7 @@ class DBHelper:
         user = self.db.users.find_one({"token": token})
         if user is not None:
             self.db.users.update_one({"_id": user['_id']}, {"$set": {"token": None, "confirmed": True}})
-            return (user['email'], user['place'])
+            return user
         return False
 
     def add_testem(self, nome, estabelecimento, depoimento):

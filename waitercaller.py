@@ -162,9 +162,9 @@ def register():
 
 @app.route("/confirm/<token>")
 def confirm_email(token):
-    email, place = DB.confirm_email(token)
-    if email:
-        send_welcome_email(email, place)
+    user = DB.confirm_email(token)
+    if user is not None:
+        send_welcome_email(user['email'], user['place'])
         return render_template("home.html", loginform=LoginForm(), registrationform=RegistrationForm(), onloadmessage="Seu email foi confirmado!")
         #return "Seu email foi confirmado!"
     else:
