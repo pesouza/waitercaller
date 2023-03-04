@@ -109,7 +109,7 @@ Mais uma vez, seja muito bem-vindo ao Waiter Express!
 Atenciosamente,
 Equipe Waiter Express.
         """,
-        subject = 'Bem-vindo ao Waiter Express!'
+        subject = 'Bem-vindo ao Waiter Express!',
         sender = ('Waiter Express', [config.email]),
         cc = [config.email]
         recipients = email,        
