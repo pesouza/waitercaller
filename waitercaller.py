@@ -80,7 +80,7 @@ def send_confirmation_email(email, token):
         sender = ('Paulo Souza', config.email),
         recipients=[email],        
         html=render_template("confirm_email.html", 
-                            confirm_url=f'waiterexpress.com.br/confirm/{token}'),
+                            confirm_url=f'{YOUR_DOMAIN}/confirm/{token}'),
     )
     mail.send(msg)
 
