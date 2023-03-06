@@ -27,6 +27,9 @@ class DBHelper:
                                 "created_on": datetime.today()})
 
 
+    def last_login(self, email):
+        self.db.users.update_one({"email": email}, {"$set": {"last_login": datetime.today()}})
+
     def confirm_email(self, token):
         user = self.db.users.find_one({"token": token})
         if user is not None:

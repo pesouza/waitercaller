@@ -131,6 +131,7 @@ def login():
         if stored_user and PH.validate_password(form.loginpassword.data, stored_user['salt'], stored_user['hashed']) and stored_user['confirmed']:
             user = User(form.loginemail.data)
             login_user(user, remember=True)
+            DB.last_login(stored_user["email"])
             return redirect(url_for('account'))
         form.loginemail.errors.append("E-mail ou senha inválido")
     return render_template("home.html", loginform=form, registrationform=RegistrationForm())
@@ -273,6 +274,7 @@ def termos():
     return render_template("termos.html")
 
 @app.route('/create-checkout-session', methods=['POST'])
+@login_required
 def create_checkout_session():
     try:
         prices = stripe.Price.list(
@@ -299,6 +301,7 @@ def create_checkout_session():
         return f"Server error: {e}", 500
 
 @app.route('/create-portal-session', methods=['POST'])
+@login_required
 def customer_portal():
     # For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
     # Typically this is stored alongside the authenticated user in your database.
@@ -358,6 +361,7 @@ def webhook_received():
     return jsonify({'status': 'success'})
 
 @app.route('/adicionar_testemunho', methods=['GET', 'POST'])
+@login_required
 def adicionar_testemunho():
     if request.method == 'POST':
         nome = request.form['nome']
